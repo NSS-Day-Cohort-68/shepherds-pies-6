@@ -1,7 +1,24 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom"
+import "./App.css"
+import { Login } from "./components/login/Login.js"
+import { Register } from "./components/login/Register.js"
+import { Authorized } from "./views/Authorized.js"
+import { ApplicationViews } from "./views/ApplicationViews.js"
 
 function App() {
-  return <div className="App">Shepherd's Pies</div>;
-}
+	return (
+		<Routes>
+			<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<Register />} />
 
-export default App;
+			<Route
+				path="*"
+				element={
+					<Authorized>
+						<ApplicationViews />
+					</Authorized>
+				}
+			/>
+		</Routes>
+	)
+}
