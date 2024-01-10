@@ -1,0 +1,95 @@
+{
+	"employees": [
+		{
+			"id": 1,
+			"name": "John Doe",
+			"address": "123 Main St",
+			"phoneNumber": 1234567890,
+			"email": "john.doe@example.com",
+			"isAdmin": false
+		},
+		{
+			"id": 2,
+			"name": "Jane Smith",
+			"address": "456 Oak Ave",
+			"phoneNumber": 9876543210,
+			"email": "jane.smith@example.com",
+			"isAdmin": true
+		}
+	],
+	"orders": [
+		{
+			"id": 1,
+			"employeeId": 1,
+			"deliveryDriver": null,
+			"tableNumber": 5,
+			"timestamp": "{datetime}"
+		},
+		{
+			"id": 2,
+			"employeeId": 2,
+			"deliveryDriver": null,
+			"tableNumber": 17,
+			"timestamp": "{datetime}"
+		},
+		{
+			"id": 3,
+			"employeeId": 2,
+			"deliveryDriver": 1,
+			"tableNumber": null,
+			"timestamp": "{datetime}"
+		}
+	],
+	"pizzas": [
+		{ "id": 1, "sizeId": 1, "cheeseId": 1, "sauceId": 1, "orderId": 1 },
+		{ "id": 2, "sizeId": 1, "cheeseId": 3, "sauceId": 2, "orderId": 1 },
+		{ "id": 3, "sizeId": 3, "cheeseId": 1, "sauceId": 1, "orderId": 1 },
+		{ "id": 4, "sizeId": 3, "cheeseId": 2, "sauceId": 1, "orderId": 2 },
+		{ "id": 5, "sizeId": 2, "cheeseId": 2, "sauceId": 2, "orderId": 2 },
+		{ "id": 6, "sizeId": 1, "cheeseId": 2, "sauceId": 1, "orderId": 3 },
+		{ "id": 7, "sizeId": 1, "cheeseId": 3, "sauceId": 3, "orderId": 3 }
+	],
+	"sizes": [
+		{ "id": 1, "size": "Small" },
+		{ "id": 2, "size": "Medium" },
+		{ "id": 3, "size": "Large" }
+	],
+	"cheeses": [
+		{ "id": 1, "cheese": " Buffalo Mozzarella" },
+		{ "id": 2, "cheese": "Four Cheese" },
+		{ "id": 3, "cheese": "Vegan" },
+		{ "id": 4, "cheese": "None (cheeseless)" }
+	],
+	"sauces": [
+		{ "id": 1, "sauce": "Marinara" },
+		{ "id": 2, "sauce": "Arrabbiata" },
+		{ "id": 3, "sauce": "Garlic White" },
+		{ "id": 4, "sauce": "None (sauceless)" }
+	],
+	"toppings": [
+		{ "id": 1, "topping": "Sausage" },
+		{ "id": 2, "topping": "Pepperoni" },
+		{ "id": 3, "topping": "Mushroom" },
+		{ "id": 4, "topping": "Onion" },
+		{ "id": 5, "topping": "Green Pepper" },
+		{ "id": 6, "topping": "Black Olive" },
+		{ "id": 7, "topping": "Basil" },
+		{ "id": 8, "topping": "Extra Cheese" }
+	],
+	"pizzaToppings": [
+		{ "id": 1, "pizzaId": 1, "toppingId": 2 },
+		{ "id": 2, "pizzaId": 1, "toppingId": 1 },
+		{ "id": 3, "pizzaId": 2, "toppingId": 6 },
+		{ "id": 4, "pizzaId": 2, "toppingId": 7 },
+		{ "id": 5, "pizzaId": 2, "toppingId": 1 },
+		{ "id": 6, "pizzaId": 3, "toppingId": 2 },
+		{ "id": 7, "pizzaId": 3, "toppingId": 2 },
+		{ "id": 8, "pizzaId": 4, "toppingId": 3 },
+		{ "id": 9, "pizzaId": 4, "toppingId": 3 },
+		{ "id": 10, "pizzaId": 4, "toppingId": 5 },
+		{ "id": 11, "pizzaId": 5, "toppingId": 4 },
+		{ "id": 12, "pizzaId": 6, "toppingId": 3 },
+		{ "id": 13, "pizzaId": 6, "toppingId": 5 },
+		{ "id": 14, "pizzaId": 7, "toppingId": 6 }
+	]
+}
