@@ -5,17 +5,17 @@ import "./NavBar.css"
 export const NavBar = ({ currentUser }) => {
 	const navigate = useNavigate()
 
-	const newOrderObj = {
-		employeeId: currentUser.id,
-		deliveryDriver: null,
-		tableNumber: 0,
-		timestamp: new Date(),
-	}
-
 	const handleAddNewOrder = (event) => {
 		event.preventDefault()
+		const newOrderObj = {
+			employeeId: currentUser.id,
+			deliveryDriver: null,
+			tableNumber: 0,
+			timestamp: new Date(),
+		}
 
-		addNewOrder(newOrderObj)
+		// uncomment this line once order functionality is added
+		// addNewOrder(newOrderObj)
 		navigate("/createOrder")
 	}
 
