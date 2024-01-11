@@ -6,21 +6,21 @@ import { Authorized } from "./views/Authorized.js"
 import { ApplicationViews } from "./views/ApplicationViews.js"
 
 function App() {
-	return (
-		<Routes>
-			<Route path="/login" element={<Login />} />
-			<Route path="/register" element={<Register />} />
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-			<Route
-				path="*"
-				element={
-					<Authorized>
-						<ApplicationViews />
-					</Authorized>
-				}
-			/>
-		</Routes>
-	)
+      <Route
+        path="*"
+        element={
+          <Authorized>
+            <ApplicationViews />
+          </Authorized>
+        }
+      />
+    </Routes>
+  )
 }
 
 export default App
