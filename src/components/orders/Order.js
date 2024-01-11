@@ -1,21 +1,33 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { addNewPizza, getOrdersPizzas } from "../../services/pizzaService"
 
 //Order page - add pizzas and edit table number or delivery driver
-export const Order = () => {
-  
+export const Order = ({ currentOrder }) => {
+  const [pizzaID, setPizzaID] = useState(0)
+  const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
+
+  let newPizzaObj = {
+    sizeId: 0,
+    cheeseId: 0,
+    sauceId: 0,
+    orderId: 0,
+  }
+
   useEffect(() => {
-    
+    getOrdersPizzas(order)
   })
 
   return (
-    <div
-      className="navbar-button"
-      onClick={() => {
-        //POST TO API
-        
-      }}
-    >
-      Add Pizza
+    <div>
+      <button
+        className="add-new-pizza-btn"
+        onClick={() => {
+          //POST TO API
+          addNewPizza(newPizzaObj)
+        }}
+      >
+        Add Pizza
+      </button>
     </div>
   )
 }
