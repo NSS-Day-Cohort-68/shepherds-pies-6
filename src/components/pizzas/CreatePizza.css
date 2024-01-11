@@ -1,0 +1,29 @@
+.createPizza-main-conatainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: 1px dotted black;
+}
+
+.createPizza-choices-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px dotted black;
+}
+
+.createPizza-choices-header {
+    border: 1px dotted black;
+}
+
+.createPizza-choices-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    list-style-type: none;
+    border: 1px dotted black;
+}
+
+.createPizza-choices-item {
+    border: 1px dotted black;
+}
