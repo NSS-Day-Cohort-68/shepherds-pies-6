@@ -3,33 +3,42 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
 
-export const Register = (props) => {
-	const [customer, setCustomer] = useState({
+export const Register = () => {
+	const [user, setUser] = useState({
 		email: "",
 		fullName: "",
-		isStaff: false,
+		address: "",
+		phoneNumber: 0,
+		isAdmin: false,
 	})
 	let navigate = useNavigate()
 
-	const registerNewUser = () => {
-		createUser(customer).then((createdUser) => {
-			if (createdUser.hasOwnProperty("id")) {
-				localStorage.setItem(
-					"shepard_user",
-					JSON.stringify({
-						id: createdUser.id,
-						staff: createdUser.isStaff,
-					})
-				)
+	const registerNewUser = async () => {
+		if (
+			user.email !== "" &&
+			user.fullName !== "" &&
+			user.address !== "" &&
+			user.phoneNumber !== 0
+		) {
+			createUser(user).then((createdUser) => {
+				if (createdUser.hasOwnProperty("id")) {
+					localStorage.setItem(
+						"shepard_user",
+						JSON.stringify({
+							id: createdUser.id,
+							isAdmin: createdUser.isAdmin,
+						})
+					)
+				}
+			})
 
-				navigate("/")
-			}
-		})
+			navigate("/")
+		}
 	}
 
 	const handleRegister = (e) => {
 		e.preventDefault()
-		getUserByEmail(customer.email).then((response) => {
+		getUserByEmail(user.email).then((response) => {
 			if (response.length > 0) {
 				// Duplicate email. No good.
 				window.alert("Account with that email address already exists")
@@ -41,15 +50,15 @@ export const Register = (props) => {
 	}
 
 	const updateCustomer = (evt) => {
-		const copy = { ...customer }
+		const copy = { ...user }
 		copy[evt.target.id] = evt.target.value
-		setCustomer(copy)
+		setUser(copy)
 	}
 
 	return (
 		<main style={{ textAlign: "center" }}>
 			<form className="form-login" onSubmit={handleRegister}>
-				<h1>Honey Rae Repairs</h1>
+				<h1>Shepard's Pies</h1>
 				<h2>Please Register</h2>
 				<fieldset>
 					<div className="form-group">
@@ -78,23 +87,51 @@ export const Register = (props) => {
 				</fieldset>
 				<fieldset>
 					<div className="form-group">
+						<input
+							onChange={updateCustomer}
+							type="address"
+							id="address"
+							className="form-control"
+							placeholder="Address"
+							required
+						/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div className="form-group">
+						<input
+							onChange={updateCustomer}
+							type="phoneNumber"
+							id="phoneNumber"
+							className="form-control"
+							placeholder="Phone number"
+							required
+						/>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div className="form-group">
 						<label>
 							<input
 								onChange={(evt) => {
-									const copy = { ...customer }
-									copy.isStaff = evt.target.checked
-									setCustomer(copy)
+									const copy = { ...user }
+									copy.isAdmin = evt.target.checked
+									setUser(copy)
 								}}
 								type="checkbox"
-								id="isStaff"
+								id="isAdmin"
 							/>
-							I am an employee{" "}
+							I am an admin{" "}
 						</label>
 					</div>
 				</fieldset>
 				<fieldset>
 					<div className="form-group">
-						<button className="login-btn btn-info" type="submit">
+						<button
+							className="login-btn btn-info"
+							type="submit"
+							onClick={handleRegister}
+						>
 							Register
 						</button>
 					</div>

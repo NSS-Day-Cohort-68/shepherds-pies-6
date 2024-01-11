@@ -13,12 +13,11 @@ export const Login = () => {
 
 		getUserByEmail(email).then((foundUsers) => {
 			if (foundUsers.length === 1) {
-				const user = foundUsers[0]
+				const employee = foundUsers[0]
 				localStorage.setItem(
 					"shepard_user",
 					JSON.stringify({
-						// id: user.id,
-						// isStaff: user.isStaff,
+						id: employee.id,
 					})
 				)
 

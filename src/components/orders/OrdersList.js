@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllOrders } from "../../ServicesDirectory/orderService"
+import { getAllOrders } from "../../services/orderService"
 import { Order } from "./Order"
 import "./Orders.css"
 
@@ -18,6 +18,7 @@ export const OrderList = () => {
 
   return (
     <article className="orders">
+      <h2>Order History</h2>
       {allOrders.map((orderObj) => {
         return <Order order={orderObj} getAndSetOrders={getAndSetOrders} />
       })}

@@ -8,8 +8,8 @@ import { ApplicationViews } from "./views/ApplicationViews.js"
 function App() {
   return (
     <Routes>
-      {/* <Route path="/login" element={<Login />} />
-			<Route path="/register" element={<Register />} /> */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       <Route
         path="*"
@@ -22,3 +22,5 @@ function App() {
     </Routes>
   )
 }
+
+export default App
