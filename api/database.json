@@ -15,6 +15,12 @@
 			"phoneNumber": 9876543210,
 			"email": "jane.smith@example.com",
 			"isAdmin": true
+		},
+		{
+			"email": "dynastyphilly@email.com",
+			"fullName": "Frank Reynolds",
+			"isAdmin": true,
+			"id": 3
 		}
 	],
 	"orders": [
