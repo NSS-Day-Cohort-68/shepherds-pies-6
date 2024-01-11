@@ -7,7 +7,7 @@ export const Register = (props) => {
 	const [customer, setCustomer] = useState({
 		email: "",
 		fullName: "",
-		isStaff: false,
+		isAdmin: false,
 	})
 	let navigate = useNavigate()
 
@@ -18,7 +18,7 @@ export const Register = (props) => {
 					"shepard_user",
 					JSON.stringify({
 						id: createdUser.id,
-						staff: createdUser.isStaff,
+						isAdmin: createdUser.isAdmin,
 					})
 				)
 
@@ -82,11 +82,11 @@ export const Register = (props) => {
 							<input
 								onChange={(evt) => {
 									const copy = { ...customer }
-									copy.isStaff = evt.target.checked
+									copy.isAdmin = evt.target.checked
 									setCustomer(copy)
 								}}
 								type="checkbox"
-								id="isStaff"
+								id="isAdmin"
 							/>
 							I am an employee{" "}
 						</label>
@@ -94,7 +94,11 @@ export const Register = (props) => {
 				</fieldset>
 				<fieldset>
 					<div className="form-group">
-						<button className="login-btn btn-info" type="submit">
+						<button
+							className="login-btn btn-info"
+							type="submit"
+							onClick={handleRegister}
+						>
 							Register
 						</button>
 					</div>
