@@ -1,0 +1,17 @@
+.order {
+    display: flex;
+  }
+  
+  .order-block {
+    /* Add any other styles for order-block here */
+  }
+  
+  .order-title-block,
+  .date-block {
+    margin-right: 20px; /* Adjust the margin as needed for spacing between the blocks */
+  }
+  
+  .order-title,
+  .date {
+    font-weight: bold; /* Optionally, make titles bold */
+  }
