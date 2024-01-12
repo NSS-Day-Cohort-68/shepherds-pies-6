@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
+// import { addNewOrder } from "../../services/orderService.js"
 import "./NavBar.css"
 
 export const NavBar = () => {
