@@ -3,7 +3,7 @@ import { getAllOrders } from "../../services/orderService"
 import { Order } from "./Order"
 import "./Orders.css"
 
-export const OrderList = () => {
+export const OrdersList = () => {
   const [allOrders, setAllOrders] = useState([])
 
   const getAndSetOrders = () => {
@@ -18,9 +18,15 @@ export const OrderList = () => {
 
   return (
     <article className="orders">
-      <h2>Order History</h2>
+      <h2 className="header">Order History</h2>
       {allOrders.map((orderObj) => {
-        return <Order order={orderObj} getAndSetOrders={getAndSetOrders} />
+        return (
+          <Order
+            order={orderObj}
+            key={orderObj.id}
+            getAndSetOrders={getAndSetOrders}
+          />
+        )
       })}
     </article>
   )

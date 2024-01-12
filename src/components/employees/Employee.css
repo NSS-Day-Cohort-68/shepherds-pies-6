@@ -1,9 +1,11 @@
-.order {
+.employee {
     display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
     flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
-  }
-  
-  .order-block {
+}
+
+.employee-block {
     display: flex;
     flex-direction: column; /* Display items in a column layout */
     align-items: center; /* Align items horizontally in the center */
@@ -13,23 +15,18 @@
     padding: 10px; /* Padding around the text */
     border-radius: 8px; /* Border radius for rounded corners */
     width: 800px; /* Set a fixed width for each block */
-  }
-  
-  .order-title,
-  .date {
+}
+
+.employee-name {
     margin-top: 5px; /* Add margin above Order # and Date for spacing */
     margin-bottom: 5px; /* Add margin below Order # and Date for spacing */
-  }
-  
-  .order-title::after {
+}
+
+.employee-name::after {
     margin-right: 5px; /* Adjust the margin as needed */
   }
   
-  .date::before {
-    margin-right: 5px; /* Adjust the margin as needed */
-  }
-  
-.orders {
+.employees {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,5 +38,4 @@
     text-align: center;
     margin-bottom: 20px; /* Adjust the margin as needed for spacing */
   }
-  
   
