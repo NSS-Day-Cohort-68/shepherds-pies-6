@@ -1,14 +1,20 @@
-.createPizza-main-conatainer {
+.createPizza-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px dotted black;
+}
+
+.createPizza-block-container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    border: 1px dotted black;
 }
 
 .createPizza-choices-block {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     border: 1px dotted black;
 }
 
@@ -26,4 +32,19 @@
 
 .createPizza-choices-item {
     border: 1px dotted black;
+}
+
+.createPizza-toppings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createPizza-btns-container {
+    display: flex;
+    justify-content: center;
+}
+
+.createPizza-btn {
+    margin: 10px;
 }

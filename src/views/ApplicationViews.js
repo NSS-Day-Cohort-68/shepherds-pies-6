@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
+import { CreatePizza } from '../components/pizzas/CreatePizza'
 
 export const ApplicationViews = () => {
 	const [currentUser, setCurrentUser] = useState({})
@@ -17,6 +18,7 @@ export const ApplicationViews = () => {
 				element={
 					<>
 						{/* <NavBar /> */}
+						<CreatePizza />
 						<Outlet />
 					</>
 				}
