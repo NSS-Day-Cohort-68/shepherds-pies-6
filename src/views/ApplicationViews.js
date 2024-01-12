@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { Outlet, Route, Routes } from "react-router-dom"
-import { OrderList } from "../components/orders/OrdersList"
 import { NavBar } from "../components/nav/NavBar.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
-import { CreateOrder } from "../components/orders/CreateOrder.js"
+import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
 import { SalesList } from "../components/sales/SalesView.js"
-
+import { PizzasList } from "../components/pizzas/PizzasList.js"
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
+  const [currentOrderID, setCurrentOrderID] = useState(0)
 
   useEffect(() => {
     // get logged in user from local storage
@@ -22,16 +22,28 @@ export const ApplicationViews = () => {
         path="/"
         element={
           <>
-            <NavBar currentUser={currentUser} />
+            <NavBar />
             <Outlet />
           </>
         }
       >
         <Route index element={<OrdersList />} />
         <Route index path="allOrders" element={<OrdersList />} />
-        <Route path="createOrder" element={<CreateOrder />} />
+        <Route
+          path="showOrder"
+          element={
+            <ShowOrder
+              currentUser={currentUser}
+              setCurrentOrderID={setCurrentOrderID}
+            />
+          }
+        />
         <Route path="employees" element={<EmployeesList />} />
         <Route path="salesReport" element={<SalesList />} />
+        <Route
+          path="createPizza"
+          element={<PizzasList currentOrderID={currentOrderID} />}
+        />
       </Route>
     </Routes>
   )

@@ -1,37 +1,53 @@
 import { useEffect, useState } from "react"
-import { addNewPizza, getOrdersPizzas } from "../../services/pizzaService"
+import {
+  addNewPizza,
+  getOrdersPizzas,
+  getAllPizzaDetails,
+} from "../../services/pizzaService"
+import { addNewOrder, getAllOrders } from "../../services/orderService"
+import { Link } from "react-router-dom"
 
 //Order page - add pizzas and edit table number or delivery driver
-export const ShowOrder = ({ newOrderObj }) => {
-  const [pizzaID, setPizzaID] = useState(0)
+export const ShowOrder = ({ currentUser, setCurrentOrderID }) => {
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
+  const [allOrders, setAllOrders] = useState([])
+  const [allPizzas, setAllPizzas] = useState([])
 
-  let newPizzaObj = {
-    sizeId: 0,
-    cheeseId: 0,
-    sauceId: 0,
-    orderId: 0,
+  const handleAddNewOrder = (event) => {
+    event.preventDefault()
+    const newOrderObj = {
+      id: allOrders.length + 1,
+      employeeId: currentUser.id,
+      deliveryDriver: null,
+      tableNumber: 0,
+      timestamp: new Date(),
+    }
+
+    addNewOrder(newOrderObj)
+    setCurrentOrderID(newOrderObj.id)
   }
 
   useEffect(() => {
-    getOrdersPizzas(newOrderObj).then((ordersPizzasArr) => {
-      setCurrentOrdersPizzas(ordersPizzasArr)
+    getAllOrders().then((ordersArr) => {
+      setAllOrders(ordersArr)
+    })
+    getAllPizzaDetails().then((pizzasArr) => {
+      setAllPizzas(pizzasArr)
     })
   }, [])
 
-	
-
   return (
     <div>
-      <button
-        className="add-new-pizza-btn"
-        onClick={() => {
-          //POST TO API
-			addNewPizza(newPizzaObj)
-			
-        }}
-      >
-        Add Pizza
+      <div>
+        {/* {currentOrdersPizzas.map((ordersPizza) => {
+          return <div>A {ordersPizza.sizeId.size} with {ordersPizza.cheeseId.cheese}, {ordersPizza.sauceId.sauce} sauce, and { } toppings</div>
+        })} */}
+      </div>
+      <button className="create-order-btn" onClick={handleAddNewOrder}>
+        New Order
+      </button>
+      <button className="add-new-pizza-btn">
+        <Link to="/createPizza">New Pizza</Link>
       </button>
     </div>
   )

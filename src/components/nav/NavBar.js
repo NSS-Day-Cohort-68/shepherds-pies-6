@@ -1,23 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
-import { addNewOrder } from "../../services/orderService.js"
 import "./NavBar.css"
 
-export const NavBar = ({ currentUser }) => {
+export const NavBar = () => {
   const navigate = useNavigate()
-
-  const handleAddNewOrder = (event) => {
-    event.preventDefault()
-    const newOrderObj = {
-      employeeId: currentUser.id,
-      deliveryDriver: null,
-      tableNumber: 0,
-      timestamp: new Date(),
-    }
-
-    // uncomment this line once order functionality is added
-    addNewOrder(newOrderObj)
-    navigate("/showOrder")
-  }
 
   return (
     <ul className="navbar">
@@ -25,7 +10,7 @@ export const NavBar = ({ currentUser }) => {
         <Link to="/allOrders">All Orders</Link>
       </li>
       <li className="navbar-item">
-        <Link onClick={handleAddNewOrder}>Create Order</Link>
+        <Link to="/showOrder">New Order</Link>
       </li>
       <li className="navbar-item">
         <Link to="/employees">Employees</Link>

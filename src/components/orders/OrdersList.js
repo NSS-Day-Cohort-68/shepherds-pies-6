@@ -3,7 +3,7 @@ import { getAllOrders } from "../../services/orderService"
 import { Order } from "./Order"
 import "./Orders.css"
 
-export const OrderList = () => {
+export const OrdersList = () => {
   const [allOrders, setAllOrders] = useState([])
 
   const getAndSetOrders = () => {
