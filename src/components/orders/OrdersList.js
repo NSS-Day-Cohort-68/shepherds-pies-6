@@ -14,13 +14,19 @@ export const OrdersList = () => {
 
 	useEffect(() => {
 		getAndSetOrders()
-	}, []) // ONLY runs on intial render of component
+	}, []) // ONLY runs on initial render of component
 
 	return (
 		<article className="orders">
 			<h2>Order History</h2>
 			{allOrders.map((orderObj) => {
-				return <Order order={orderObj} getAndSetOrders={getAndSetOrders} />
+				return (
+					<Order
+						key={orderObj.id}
+						order={orderObj}
+						getAndSetOrders={getAndSetOrders}
+					/>
+				)
 			})}
 		</article>
 	)
