@@ -4,8 +4,7 @@ import { NavBar } from "../components/nav/NavBar.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
 import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesView.js"
-import { PizzasList } from "../components/pizzas/PizzasList.js"
+import { SalesList } from "../components/sales/SalesList.js"
 import { CreatePizza } from '../components/pizzas/CreatePizza'
 
 
