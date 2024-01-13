@@ -10,9 +10,9 @@ export const getAllPizzaDetails = async () => {
   ).then((res) => res.json())
 }
 
-export const getOrdersPizzas = async (orderID) => {
+export const getOrdersPizzas = async (orderId) => {
   return await fetch(
-    `http://localhost:8088/pizzas?orderId=${orderID}&_expand=size&_expand=cheese&_expand=sauce&_embed=pizzaToppings`
+    `http://localhost:8088/pizzas?orderId=${orderId}&_expand=size&_expand=cheese&_expand=sauce&_embed=pizzaToppings`
   ).then((res) => res.json())
 }
 
