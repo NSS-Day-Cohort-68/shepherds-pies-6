@@ -4,8 +4,8 @@ import { NavBar } from "../components/nav/NavBar.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
 import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesView.js"
-import { PizzasList } from "../components/pizzas/PizzasList.js"
+import { SalesList } from "../components/sales/SalesList.js"
+import { CreatePizza } from '../components/pizzas/CreatePizza'
 
 
 export const ApplicationViews = () => {
@@ -30,7 +30,7 @@ export const ApplicationViews = () => {
         }
       >
         <Route index element={<OrdersList />} />
-        <Route index path="allOrders" element={<OrdersList />} />
+        <Route path="allOrders" element={<OrdersList />} />
         <Route
           path="showOrder"
           element={
@@ -44,7 +44,7 @@ export const ApplicationViews = () => {
         <Route path="salesReport" element={<SalesList />} />
         <Route
           path="createPizza"
-          element={<PizzasList currentOrderID={currentOrderID} />}
+          element={<CreatePizza currentOrderID={currentOrderID} />}
         />
       </Route>
     </Routes>
