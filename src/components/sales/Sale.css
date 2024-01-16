@@ -1,0 +1,32 @@
+.sales {
+	display: flex;
+	flex-direction: column;
+}
+
+.sale {
+	background-color: var(--white);
+	border: 1px solid var(--outline);
+	margin: 0.5rem 0;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+}
+
+.sales-container {
+	margin: 1rem 5rem 8rem 5rem;
+}
+
+.sale > * {
+	padding: 0.5rem;
+}
+
+.sale-info {
+	/* display: inline; */
+	/* margin: 10px; */
+	/* padding: 5px; */
+	font-family: "Roboto", sans-serif;
+	font-size: 0.75em;
+}
+
+.sale > footer > * {
+	flex-basis: 22%;
+}
