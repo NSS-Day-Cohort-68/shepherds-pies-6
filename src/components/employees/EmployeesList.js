@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllEmployees } from "../../services/employeeService"
 import { Employee } from "./Employee"
+import { Link } from "react-router-dom"
 import "./Employee.css"
 
 export const EmployeesList = () => {
@@ -16,7 +17,11 @@ export const EmployeesList = () => {
     <article className="employees">
       <h2 className="header">Employees</h2>
       {allEmployees.map((employeeObj) => {
-        return <Employee employee={employeeObj} key={employeeObj.id} />
+        return (
+          <Link to={`/employees/${employeeObj.id}`}>
+            <Employee employee={employeeObj} key={employeeObj.id} />
+          </Link>
+        )
       })}
     </article>
   )
