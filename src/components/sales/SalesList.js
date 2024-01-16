@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Sale } from "./Sale.js"
 import { getAllOrders } from "../../services/orderService.js"
+import { Months } from "./Months"
 
 export const SalesList = () => {
 	const months = [
@@ -37,51 +38,24 @@ export const SalesList = () => {
 
 	return (
 		<>
-			<div className="sales">
+			<div className="sales-report">
 				<h2>Sales Report</h2>
-				<div className="months-div">
-					<select className="month-dropdown">
-						<option value={0} className="month month-option">
-							All Months
-						</option>
-						{months.map((monthObj) => {
-							return (
-								<option
-									value={monthObj.id}
-									className="month-option"
-									key={monthObj.id}
-								>
-									{monthObj.month}
-								</option>
-							)
-						})}
-					</select>
-				</div>
-				<div className="sales-container">
-					<h2>Sales</h2>
-					<article className="sales">
-						{allOrders.map((orderObj) => {
-							return (
-								<Sale
-									order={orderObj}
-									pizzasArray={orderObj.pizzas}
-									key={orderObj.id}
-								/>
-							)
-						})}
-					</article>
-				</div>
+				<Months />
+			</div>
+			<div className="sales-container">
+				<h2>Sales</h2>
+				<article className="sales">
+					{allOrders.map((orderObj) => {
+						return (
+							<Sale
+								order={orderObj}
+								pizzasArray={orderObj.pizzas}
+								key={orderObj.id}
+							/>
+						)
+					})}
+				</article>
 			</div>
 		</>
 	)
 }
-
-// ! SIZES
-// !
-// ! SMALL - $10.00
-// ! MEDIUM - $12.00
-// ! LARGE - $15.00
-// !
-// ! TOPPINGS $0.50 / each
-// !
-// ! DELIVERY CHARGE - $5.00
