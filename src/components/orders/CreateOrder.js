@@ -73,6 +73,7 @@ export const ShowOrder = ({
 
   return (
     <div className="create-order-container">
+      {/* choose a driver from the dropdown OR choose a table and then click create order btn */}
       <button className="create-order-btn" onClick={handleAddNewOrder}>
         New Order
       </button>
@@ -92,15 +93,16 @@ export const ShowOrder = ({
             </div>
           )
         })}
+        <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
+          <Link to="/createPizza">New Pizza</Link>
+        </button>
       </div>
-      <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
-        <Link to="/createPizza">New Pizza</Link>
-      </button>
+      <div>
+        <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
+          <Link to="/createPizza">New Pizza</Link>
+        </button>
+      </div>
     </div>
   )
 }
 
-// get the current order ID
-// when click on add pizza, current order id is pizza orderId
-// navigate to Add Pizza page
-// when assign driver is selected, deliveryDriver is employee Id
