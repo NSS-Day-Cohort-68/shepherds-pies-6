@@ -5,7 +5,7 @@ import { OrdersList } from "../components/orders/OrdersList.js"
 import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
 import { SalesList } from "../components/sales/SalesList.js"
-import { CreatePizza } from "../components/pizzas/CreatePizza.js"
+import { CreatePizza } from "../components/pizzas/CreatePizza"
 
 export const ApplicationViews = () => {
 	const [currentUser, setCurrentUser] = useState({})
@@ -36,6 +36,7 @@ export const ApplicationViews = () => {
 						<ShowOrder
 							currentUser={currentUser}
 							setCurrentOrderID={setCurrentOrderID}
+							currentOrderID={currentOrderID}
 						/>
 					}
 				/>
