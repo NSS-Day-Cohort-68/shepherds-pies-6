@@ -6,11 +6,7 @@ import {
   getPizzaToppings,
   getPizzasByOrderId,
 } from "../../services/pizzaService"
-import {
-  addNewOrder,
-  getAllOrders,
-  getOrderById,
-} from "../../services/orderService"
+import { editOrder, getOrderById } from "../../services/orderService"
 import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
 
@@ -25,20 +21,27 @@ export const EditOrder = () => {
   const [allEmployees, setAllEmployees] = useState([])
   const tableNumbers = []
 
+  const handleEditOrder = (event) => {
+    const orderObj = {
+      id: orderId,
+      employeeId: currentOrder.employeeId,
+      deliveryDriver: driverSelection,
+      tableNumber: tableNumberSelection,
+      timestamp: currentOrder.timestamp,
+    }
+
+    editOrder(orderObj)
+  }
   for (let i = 1; i <= 20; i++) {
     tableNumbers.push(i)
   }
 
   const handleEmployeeChange = (event) => {
     setDriverSelection(event.target.value)
-
-    //need to update order with this new info
   }
 
   const handleTableChange = (event) => {
     setTableNumberSelection(event.target.value)
-
-    //need to update order with this new info
   }
 
   const getAndSetPizzas = (orderId) => {
@@ -48,21 +51,21 @@ export const EditOrder = () => {
   }
 
   const getToppingsForPizza = (pizza) => {
+    //check if pizza object is defined - if not return empty array
     if (!pizza) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
-    const pizzaToppingsForPizza = pizzaToppings.filter(
-      (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
-    )
     //then map each pizzaTopping to get the toppingId
-    const toppingIds = pizzaToppingsForPizza.map(
-      (pizzaTopping) => pizzaTopping.toppingId
-    )
-    //then for each toppingId we want to compare it to the topping id and return the topping for that pizza
-    const toppingsForPizza = toppingIds.map((toppingId) =>
-      allToppings.find((topping) => topping.id === toppingId)
-    )
+    //then for each toppingId we want to compare toppingId to
+    //the topping id and return the topping for that pizza
+    const toppingsForPizza = pizzaToppings
+      .filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
+      .map((pizzaTopping) => pizzaTopping.toppingId)
+      .map((toppingId) =>
+        allToppings.find((topping) => topping.id === toppingId)
+      )
+
     return toppingsForPizza
   }
 
@@ -106,6 +109,9 @@ export const EditOrder = () => {
               )
             })}
           </select>
+          <button className="save-driver-btn" onClick={handleEditOrder}>
+            Save Driver
+          </button>
         </div>
       )}
       {currentOrder.deliveryDriver === null && (
@@ -127,6 +133,9 @@ export const EditOrder = () => {
               )
             })}
           </select>
+          <button className="save-table-btn" onClick={handleEditOrder}>
+            Save Table
+          </button>
         </div>
       )}
 

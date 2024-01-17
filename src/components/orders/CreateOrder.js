@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import {
-	getAllToppings,
-	getPizzasByOrderId,
-	getPizzaToppings,
+  getAllToppings,
+  getPizzasByOrderId,
+  getPizzaToppings,
 } from "../../services/pizzaService"
 import { addNewOrder, getAllOrders } from "../../services/orderService"
 import { Link } from "react-router-dom"
@@ -10,9 +10,9 @@ import { getAllEmployees } from "../../services/employeeService"
 
 //Order page - add pizzas and edit table number or delivery driver
 export const ShowOrder = ({
-	currentUser,
-	setCurrentOrderID,
-	currentOrderID,
+  currentUser,
+  setCurrentOrderID,
+  currentOrderID,
 }) => {
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
   const [allOrders, setAllOrders] = useState([])
@@ -30,7 +30,6 @@ export const ShowOrder = ({
   }
 
   const handleAddNewOrder = (event) => {
-    event.preventDefault()
     const newOrderObj = {
       id: allOrders.length + 1,
       employeeId: currentUser.id,
@@ -39,10 +38,10 @@ export const ShowOrder = ({
       timestamp: new Date(),
     }
 
-		addNewOrder(newOrderObj)
-		setCurrentOrderID(newOrderObj.id)
-		setIsNewOrderCreated(true)
-	}
+    addNewOrder(newOrderObj)
+    setCurrentOrderID(newOrderObj.id)
+    setIsNewOrderCreated(true)
+  }
 
   const handleDeliveryTypeChange = (event) => {
     setDeliveryType(event.target.value)
@@ -60,21 +59,21 @@ export const ShowOrder = ({
   }
 
   const getToppingsForPizza = (pizza) => {
+    //check if pizza object is defined - if not return empty array
     if (!pizza) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
-    const pizzaToppingsForPizza = pizzaToppings.filter(
-      (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
-    )
     //then map each pizzaTopping to get the toppingId
-    const toppingIds = pizzaToppingsForPizza.map(
-      (pizzaTopping) => pizzaTopping.toppingId
-    )
-    //then for each toppingId we want to compare it to the topping id and return the topping for that pizza
-    const toppingsForPizza = toppingIds.map((toppingId) =>
-      allToppings.find((topping) => topping.id === toppingId)
-    )
+    //then for each toppingId we want to compare toppingId to
+    //the topping id and return the topping for that pizza
+    const toppingsForPizza = pizzaToppings
+      .filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
+      .map((pizzaTopping) => pizzaTopping.toppingId)
+      .map((toppingId) =>
+        allToppings.find((topping) => topping.id === toppingId)
+      )
+
     return toppingsForPizza
   }
 
@@ -189,16 +188,26 @@ export const ShowOrder = ({
           )
         })}
         <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
-          <Link to="/createPizza">New Pizza</Link>
+          {isNewOrderCreated ? (
+            <Link to="/createPizza" disabled={!isNewOrderCreated}>
+              New Pizza
+            </Link>
+          ) : (
+            <span>New Pizza</span>
+          )}
         </button>
       </div>
       <div className="order-footer-container">
         <div className="order-total">Total:</div>
-        <div className="order-total">${}</div>
+        <div className="order-total">$00.00</div>
       </div>
       <div className="order-footer-container">
         <button className="all-orders-btn" disabled={!isNewOrderCreated}>
-          <Link to="/allOrders">All Orders</Link>
+          {isNewOrderCreated ? (
+            <Link to="/allOrders">All Orders</Link>
+          ) : (
+            <span>All Orders</span>
+          )}
         </button>
       </div>
     </div>

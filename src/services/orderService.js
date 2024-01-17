@@ -21,3 +21,13 @@ export const getOrderById = async (orderId) => {
     res.json()
   )
 }
+
+export const editOrder = async (order) => {
+  return await fetch(`http://localhost:8088/orders/${order.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order),
+  }).then((res) => res.json())
+}
