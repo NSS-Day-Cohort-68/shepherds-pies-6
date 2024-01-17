@@ -50,7 +50,10 @@ export const ApplicationViews = () => {
           path="createPizza"
           element={<CreatePizza currentOrderID={currentOrderID} />}
         />
-        <Route path="employee-detail-form" element={<EmployeeForm />} />
+        <Route
+          path="employee-detail-form/:employeeId"
+          element={<EmployeeForm />}
+        />
       </Route>
     </Routes>
   )

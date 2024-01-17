@@ -1,8 +1,35 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { getEmployeeById } from "../../services/employeeService"
 
-export const EmployeeForm = (employee) => {
-  const { employeeObj } = employee.location.state
-  console.log(employeeObj)
+export const EmployeeForm = () => {
+  const [currentEmployee, setCurrentEmployee] = useState(undefined)
+  const [newName, setNewName] = useState("")
+  const [newAddress, setNewAddress] = useState("")
+  const [newPhoneNumber, setNewPhoneNumber] = useState(0)
+  const [newEmail, setNewEmail] = useState("")
+  const [newAdmin, setNewAdmin] = useState(false)
+
+  const { employeeId } = useParams()
+
+  useEffect(() => {
+    getEmployeeById(employeeId).then((data) => {
+      setCurrentEmployee(data)
+    })
+  }, [employeeId])
+
+  const handleEmployeeEdit = (event) => {
+    event.preventDefault()
+    const newEmployeeObj = {
+        name: newName,
+        address: newAddress,
+        phoneNumber: newPhoneNumber,
+        email: newEmail,
+        isAdmin:, 
+    }
+  }
+  console.log(currentEmployee)
+
   return (
     <form>
       <h2>Update Profile</h2>
@@ -12,8 +39,10 @@ export const EmployeeForm = (employee) => {
           <input
             type="text"
             name="name"
-            value={<></>}
-            onChange={<></>}
+            value={currentEmployee?.name}
+            onChange={(event) => {
+              setNewName(event.target.value)
+            }}
             required
             className="form-control"
           />
@@ -25,7 +54,7 @@ export const EmployeeForm = (employee) => {
           <input
             type="text"
             name="address"
-            value={<></>}
+            value={currentEmployee?.address}
             onChange={<></>}
             required
             className="form-control"
@@ -38,7 +67,7 @@ export const EmployeeForm = (employee) => {
           <input
             type="number"
             name="phone"
-            value={<></>}
+            value={currentEmployee?.phoneNumber}
             onChange={<></>}
             required
             className="form-control"
@@ -51,7 +80,7 @@ export const EmployeeForm = (employee) => {
           <input
             type="text"
             name="email"
-            value={<></>}
+            value={currentEmployee?.email}
             onChange={<></>}
             required
             className="form-control"

@@ -11,7 +11,7 @@ export const Employee = ({ employee, currentUser }) => {
       {/* check whether user is a admin */}
       <button
         onClick={() => {
-          navigate("/employee-detail-form", { employee })
+          navigate(`/employee-detail-form/${employee.id}`)
         }}
       >
         Edit

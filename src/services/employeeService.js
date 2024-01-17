@@ -3,3 +3,8 @@ export const getAllEmployees = () => {
     response.json()
   )
 }
+export const getEmployeeById = (employeeId) => {
+  return fetch(`http://localhost:8088/employees/${employeeId}`).then(
+    (response) => response.json()
+  )
+}
