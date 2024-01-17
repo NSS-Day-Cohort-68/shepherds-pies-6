@@ -13,6 +13,10 @@ export const OrderDetails = () => {
   const [pizzaToppings, setPizzaToppings] = useState([])
 
   const getToppingsForPizza = (pizza) => {
+    //pizza object is defined 
+    if (!pizza) {
+      return []
+    }
     //gets all the pizzaToppings with the pizzaId
     const pizzaToppingsForPizza = pizzaToppings.filter(
       (pizzaTopping) => pizzaTopping.pizzaId === pizza.id

@@ -38,20 +38,6 @@
       "deliveryDriver": 1,
       "tableNumber": null,
       "timestamp": "{datetime}"
-    },
-    {
-      "id": 4,
-      "employeeId": 2,
-      "deliveryDriver": "1",
-      "tableNumber": 0,
-      "timestamp": "2024-01-17T20:27:41.991Z"
-    },
-    {
-      "id": 5,
-      "employeeId": 2,
-      "deliveryDriver": null,
-      "tableNumber": 0,
-      "timestamp": "2024-01-17T20:39:33.386Z"
     }
   ],
   "pizzas": [

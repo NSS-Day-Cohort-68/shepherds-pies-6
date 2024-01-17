@@ -48,6 +48,9 @@ export const EditOrder = () => {
   }
 
   const getToppingsForPizza = (pizza) => {
+    if (!pizza) {
+      return []
+    }
     //gets all the pizzaToppings with the pizzaId
     const pizzaToppingsForPizza = pizzaToppings.filter(
       (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
@@ -137,11 +140,10 @@ export const EditOrder = () => {
               <div>
                 <i
                   className="delete-btn fa-solid fa-trash"
-                  onClick={() => {
-                    deletePizza(ordersPizzaObj)
-                    deleteToppingsForPizza(ordersPizzaObj).then(
-                      getAndSetPizzas(orderId)
-                    )
+                  onClick={async () => {
+                    await deletePizza(ordersPizzaObj)
+                    await deleteToppingsForPizza(ordersPizzaObj)
+                    getAndSetPizzas(orderId)
                   }}
                 ></i>
               </div>

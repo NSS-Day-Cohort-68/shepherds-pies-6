@@ -60,6 +60,9 @@ export const ShowOrder = ({
   }
 
   const getToppingsForPizza = (pizza) => {
+    if (!pizza) {
+      return []
+    }
     //gets all the pizzaToppings with the pizzaId
     const pizzaToppingsForPizza = pizzaToppings.filter(
       (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
