@@ -6,20 +6,17 @@ import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
 import { SalesList } from "../components/sales/SalesList.js"
 import { CreatePizza } from "../components/pizzas/CreatePizza"
-<<<<<<< HEAD
 import { EmployeeForm } from "../components/forms/EmployeeForm.js"
-=======
->>>>>>> c1e29662761d25f5f0d74f382e97706ba2ee5959
 
 export const ApplicationViews = () => {
-	const [currentUser, setCurrentUser] = useState({})
-	const [currentOrderID, setCurrentOrderID] = useState(0)
+  const [currentUser, setCurrentUser] = useState({})
+  const [currentOrderID, setCurrentOrderID] = useState(0)
 
-	useEffect(() => {
-		// get logged in user from local storage
-		const localUser = localStorage.getItem("shepard_user")
-		setCurrentUser(JSON.parse(localUser)) // { id: n }
-	}, [])
+  useEffect(() => {
+    // get logged in user from local storage
+    const localUser = localStorage.getItem("shepard_user")
+    setCurrentUser(JSON.parse(localUser)) // { id: n }
+  }, [])
 
   return (
     <Routes>
