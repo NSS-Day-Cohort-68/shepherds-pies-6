@@ -1,6 +1,8 @@
 .order {
 	display: flex;
 	flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
+	width: 100%;
+	justify-content: center;
 }
 
 .order-block {
@@ -8,42 +10,44 @@
 	flex-direction: row;
 	align-items: center; /* Align items horizontally in the center */
 	justify-content: space-around;
-	margin-right: 20px; /* Adjust the margin as needed for spacing between the blocks */
 	margin-bottom: 20px; /* Add margin below each order block for spacing */
 	border: 2px solid #ccc; /* Border color */
 	padding: 10px; /* Padding around the text */
 	border-radius: 8px; /* Border radius for rounded corners */
-	width: 800px; /* Set a fixed width for each block */
+	width: 80%; /* Set a fixed width for each block */
 }
 
 .order-info {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-right: 20px;
-	margin-bottom: 20px;
+	/* margin : top right bottom left */
+	margin: 20px 0px 20px 0px; 
+	width: 70%;
 }
 
-.order-title,
 .date {
 	margin-top: 5px; /* Add margin above Order # and Date for spacing */
 	margin-bottom: 5px; /* Add margin below Order # and Date for spacing */
 }
 
-.order-title::after {
-	margin-right: 5px; /* Adjust the margin as needed */
+.order-title {
+	font-weight: bold;
+	margin-top: 5px; /* Add margin above Order # and Date for spacing */
+	margin-bottom: 5px; /* Add margin below Order # and Date for spacing */
 }
 
-.date::before {
-	margin-right: 5px; /* Adjust the margin as needed */
+.order-title:hover{
+	font-size: large;
+	color: rgb(22, 42, 131);
 }
 
 .delete-btn {
 	/* ? */
-	font-size: 40px;
+	font-size: 30px;
 }
 .delete-btn:hover {
-	/* ? */
+	font-size: 35px;
 	color: red;
 }
 .pizzas-in-order {
@@ -51,6 +55,7 @@
 	margin: 10px;
 	padding: 10px;
 	border-radius: 8px;
+	width: 70%;
 }
 
 .create-order-container {
@@ -59,4 +64,64 @@
 
 .create-order-container button{
 	margin: 10px;
+}
+
+.delivery-radio-container{
+	padding: 15px;
+}
+
+.delivery-radio{
+	padding: 10px;
+}
+
+.dropdown-container{
+	padding: 10px;
+}
+
+.order-footer-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+}
+
+.order-total{
+	border: 2px solid black;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.edit-btn {
+	font-size: 30px;
+}
+
+.edit-btn:hover {
+	font-size: 35px;
+	color:limegreen;
+}
+
+.fa-solid {
+	margin: 20px;
+}
+
+.btns {
+	width: 20%;
+}
+
+.pizzas-details {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+}
+
+.pizza-price {
+	border: 2px solid black;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 8px;
+	width: 10%;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
