@@ -32,7 +32,16 @@ export const ApplicationViews = () => {
         }
       >
         <Route index element={<OrdersList />} />
-        <Route path="allOrders" element={<OrdersList />} />
+
+        <Route path="allOrders">
+          <Route index element={<OrdersList />} />
+          <Route path=":orderId" element={<OrderDetails />} />
+        </Route>
+
+        <Route path="editOrder">
+          <Route path=":orderId" element={<EditOrder />} />
+        </Route>
+
         <Route
           path="showOrder"
           element={
@@ -51,6 +60,10 @@ export const ApplicationViews = () => {
         <Route
           path="createPizza"
           element={<CreatePizza currentOrderID={currentOrderID} />}
+        />
+        <Route
+          path="employee-detail-form/:employeeId"
+          element={<EmployeeForm />}
         />
       </Route>
     </Routes>

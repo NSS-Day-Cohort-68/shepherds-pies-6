@@ -21,11 +21,11 @@ export const EmployeeForm = () => {
   const handleEmployeeEdit = (event) => {
     event.preventDefault()
     const newEmployeeObj = {
-        name: newName,
-        address: newAddress,
-        phoneNumber: newPhoneNumber,
-        email: newEmail,
-        isAdmin:, 
+      name: newName,
+      address: newAddress,
+      phoneNumber: newPhoneNumber,
+      email: newEmail,
+      // isAdmin:,
     }
   }
   console.log(currentEmployee)
