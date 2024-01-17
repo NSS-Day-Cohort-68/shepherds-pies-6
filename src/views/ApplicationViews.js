@@ -4,7 +4,9 @@ import { NavBar } from "../components/nav/NavBar.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
 import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesView.js"
+import { SalesList } from "../components/sales/SalesList.js"
+import { CreatePizza } from "../components/pizzas/CreatePizza"
+import { EmployeeForm } from "../components/forms/EmployeeForm.js"
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
@@ -35,15 +37,20 @@ export const ApplicationViews = () => {
             <ShowOrder
               currentUser={currentUser}
               setCurrentOrderID={setCurrentOrderID}
+              currentOrderID={currentOrderID}
             />
           }
         />
-        <Route path="employees" element={<EmployeesList />} />
+        <Route
+          path="employees"
+          element={<EmployeesList currentUser={currentUser} />}
+        />
         <Route path="salesReport" element={<SalesList />} />
         <Route
           path="createPizza"
           element={<CreatePizza currentOrderID={currentOrderID} />}
         />
+        <Route path="employee-detail-form" element={<EmployeeForm />} />
       </Route>
     </Routes>
   )
