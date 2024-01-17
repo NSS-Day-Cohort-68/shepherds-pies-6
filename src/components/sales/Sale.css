@@ -4,6 +4,7 @@
 }
 
 .sale {
+	display: flex;
 	background-color: var(--white);
 	border: 1px solid var(--outline);
 	margin: 0.5rem 0;
@@ -22,7 +23,7 @@
 .sale-info {
 	/* display: inline; */
 	/* margin: 10px; */
-	/* padding: 5px; */
+	padding: 5px;
 	font-family: "Roboto", sans-serif;
 	font-size: 0.75em;
 }

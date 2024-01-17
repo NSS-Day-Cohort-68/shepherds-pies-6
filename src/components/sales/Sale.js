@@ -10,6 +10,7 @@ export const Sale = ({ order, pizzasArray }) => {
 	const [currentOrder, setCurrentOrder] = useState([])
 	const [pizzaToppings, setPizzaToppings] = useState([])
 	const [allToppings, setAllToppings] = useState([])
+	// const [totalFilteredSales, setTotalFilteredSales] = useState(0)
 
 	useEffect(() => {
 		getPizzasByOrderId(order.id).then((data) => {
@@ -61,26 +62,68 @@ export const Sale = ({ order, pizzasArray }) => {
 		return toppingsForPizza
 	}
 
+	const getTotalOrderPrice = (order) => {
+		const totalPrice = order.map(
+			(price) => price.size.price + price.pizzaToppings.length * 0.5
+		)
+		let sum = 0
+		for (const price of totalPrice) {
+			sum += price
+		}
+		return sum.toFixed(2)
+	}
+
+	// useEffect(() => {
+	// 	const filteredSalesTotal = filteredOrders.map((order) => )
+	// }, [])
+
 	let count = 1
 	return (
 		<div className="sale" key={order.orderId}>
+			<div className="sale-info">Order #{currentOrder[0]?.order.id}</div>
 			{currentOrder.map((pizzaObj) => {
 				return (
 					<div>
-						<header className="sale-info">Pizza#: {count++}</header>
+						<header className="sale-info">
+							<b>Pizza#: {count++}</b>
+						</header>
 						<div className="sale-info">Size: {pizzaObj.size.size}</div>
 						<div className="sale-info">Cheese: {pizzaObj.cheese.cheese}</div>
 						<div className="sale-info">Sauce: {pizzaObj.sauce.sauce}</div>
-						<div className="sale-info">
-							Toppings:
+
+						<div className="sale-info toppings">
+							<u>Toppings:</u>
 							{getToppingsForPizza(pizzaObj).map((topping) => (
-								<div>{topping?.topping}</div>
+								<div className="topping">{topping?.topping}</div>
 							))}
 						</div>
-						<div className="sale-info">Date: {order.timestamp}</div>
+						<div className="sale-info">
+							Price: $
+							{!pizzaObj.order.deliveryDriver
+								? (
+										pizzaObj.size.price +
+										pizzaObj.pizzaToppings.length * 0.5
+								  ).toFixed(2)
+								: (
+										pizzaObj.size.price +
+										pizzaObj.pizzaToppings.length * 0.5 +
+										5
+								  ).toFixed(2)}
+						</div>
 					</div>
 				)
 			})}
+			<div className="sale-info date">
+				<b>Date:</b> {order.timestamp}
+			</div>
+			<div className="sale-info">
+				<b>Total Price: ${getTotalOrderPrice(currentOrder)}</b>
+			</div>
 		</div>
 	)
 }
+
+/* {`${(
+	pizzaObj.size.price +
+	pizzaObj.pizzaToppings.length * 0.5
+).toFixed(2)}`} */
