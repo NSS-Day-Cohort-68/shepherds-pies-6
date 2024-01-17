@@ -96,6 +96,13 @@
       "cheeseId": 3,
       "sauceId": 3,
       "orderId": 3
+    },
+    {
+      "sizeId": "1",
+      "cheeseId": "1",
+      "sauceId": "2",
+      "orderId": 3,
+      "id": 8
     }
   ],
   "sizes": [
@@ -252,6 +259,31 @@
       "id": 14,
       "pizzaId": 7,
       "toppingId": 6
+    },
+    {
+      "toppingId": 1,
+      "pizzaId": 8,
+      "id": 15
+    },
+    {
+      "toppingId": 2,
+      "pizzaId": 8,
+      "id": 16
+    },
+    {
+      "toppingId": 6,
+      "pizzaId": 8,
+      "id": 17
+    },
+    {
+      "toppingId": 7,
+      "pizzaId": 8,
+      "id": 18
+    },
+    {
+      "toppingId": 8,
+      "pizzaId": 8,
+      "id": 19
     }
   ]
 }
