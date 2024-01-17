@@ -10,14 +10,14 @@ import { EditOrder } from "../components/orders/EditOrder.js"
 import { OrderDetails } from "../components/orders/OrderDetails.js"
 
 export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({})
-  const [currentOrderID, setCurrentOrderID] = useState(0)
+	const [currentUser, setCurrentUser] = useState({})
+	const [currentOrderID, setCurrentOrderID] = useState(0)
 
-  useEffect(() => {
-    // get logged in user from local storage
-    const localUser = localStorage.getItem("shepard_user")
-    setCurrentUser(JSON.parse(localUser)) // { id: n }
-  }, [])
+	useEffect(() => {
+		// get logged in user from local storage
+		const localUser = localStorage.getItem("shepard_user")
+		setCurrentUser(JSON.parse(localUser)) // { id: n }
+	}, [])
 
   return (
     <Routes>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import {
-  getAllToppings,
-  getPizzaToppings,
-  getPizzasByOrderId,
+	getAllToppings,
+	getPizzasByOrderId,
+	getPizzaToppings,
 } from "../../services/pizzaService"
 import { addNewOrder, getAllOrders } from "../../services/orderService"
 import { Link } from "react-router-dom"
@@ -10,9 +10,9 @@ import { getAllEmployees } from "../../services/employeeService"
 
 //Order page - add pizzas and edit table number or delivery driver
 export const ShowOrder = ({
-  currentUser,
-  setCurrentOrderID,
-  currentOrderID,
+	currentUser,
+	setCurrentOrderID,
+	currentOrderID,
 }) => {
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
   const [allOrders, setAllOrders] = useState([])
@@ -39,10 +39,10 @@ export const ShowOrder = ({
       timestamp: new Date(),
     }
 
-    addNewOrder(newOrderObj)
-    setCurrentOrderID(newOrderObj.id)
-    setIsNewOrderCreated(true)
-  }
+		addNewOrder(newOrderObj)
+		setCurrentOrderID(newOrderObj.id)
+		setIsNewOrderCreated(true)
+	}
 
   const handleDeliveryTypeChange = (event) => {
     setDeliveryType(event.target.value)
