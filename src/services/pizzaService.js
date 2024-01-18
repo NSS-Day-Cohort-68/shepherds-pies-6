@@ -20,6 +20,10 @@ export const getCurrentPizzaToppings = async (pizzaId) => {
 	).then((res) => res.json())
 }
 
+export const getPizzaById = async (pizzaId) => {
+	return await fetch(`http://localhost:8088/pizzas/${pizzaId}`).then((res)=>res.json())
+}
+
 export const postPizza = async (pizzaObject) => {
 	const postOptions = {
 		method: "POST",
@@ -31,6 +35,17 @@ export const postPizza = async (pizzaObject) => {
 	let res = await fetch("http://localhost:8088/pizzas", postOptions)
 	let pizza = res.json()
 	return pizza
+}
+
+export const editPizza = async (editPizzaObj) => {
+	const putOptions = {
+		method: "PUT",
+		headers: {
+			"content-type": "application/json"
+		},
+		body: JSON.stringify(editPizzaObj)
+	}
+	await fetch(`http://localhost:8088/pizzas/${editPizzaObj.id}`, putOptions).then((res)=>console.log(res.status))
 }
 
 export const postTopping = async (toppingChoice) => {
@@ -90,3 +105,4 @@ export const getPizzaToppings = async (pizza) => {
 		`http://localhost:8088/pizzaToppings?_expand=topping`
 	).then((res) => res.json())
 }
+
