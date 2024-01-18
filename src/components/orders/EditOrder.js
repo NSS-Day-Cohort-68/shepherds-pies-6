@@ -6,7 +6,11 @@ import {
   getPizzaToppings,
   getPizzasByOrderId,
 } from "../../services/pizzaService"
+<<<<<<< HEAD
 import { getOrderById } from "../../services/orderService"
+=======
+import { editOrder, getOrderById } from "../../services/orderService"
+>>>>>>> 198cd5bf3c4f0826ef9d8d17866d908b669ee74c
 import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
 
@@ -21,20 +25,27 @@ export const EditOrder = () => {
   const [allEmployees, setAllEmployees] = useState([])
   const tableNumbers = []
 
+  const handleEditOrder = (event) => {
+    const orderObj = {
+      id: orderId,
+      employeeId: currentOrder.employeeId,
+      deliveryDriver: driverSelection,
+      tableNumber: tableNumberSelection,
+      timestamp: currentOrder.timestamp,
+    }
+
+    editOrder(orderObj)
+  }
   for (let i = 1; i <= 20; i++) {
     tableNumbers.push(i)
   }
 
   const handleEmployeeChange = (event) => {
     setDriverSelection(event.target.value)
-
-    //need to update order with this new info
   }
 
   const handleTableChange = (event) => {
     setTableNumberSelection(event.target.value)
-
-    //need to update order with this new info
   }
 
   const getAndSetPizzas = (orderId) => {
@@ -44,21 +55,21 @@ export const EditOrder = () => {
   }
 
   const getToppingsForPizza = (pizza) => {
+    //check if pizza object is defined - if not return empty array
     if (!pizza) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
-    const pizzaToppingsForPizza = pizzaToppings.filter(
-      (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
-    )
     //then map each pizzaTopping to get the toppingId
-    const toppingIds = pizzaToppingsForPizza.map(
-      (pizzaTopping) => pizzaTopping.toppingId
-    )
-    //then for each toppingId we want to compare it to the topping id and return the topping for that pizza
-    const toppingsForPizza = toppingIds.map((toppingId) =>
-      allToppings.find((topping) => topping.id === toppingId)
-    )
+    //then for each toppingId we want to compare toppingId to
+    //the topping id and return the topping for that pizza
+    const toppingsForPizza = pizzaToppings
+      .filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
+      .map((pizzaTopping) => pizzaTopping.toppingId)
+      .map((toppingId) =>
+        allToppings.find((topping) => topping.id === toppingId)
+      )
+
     return toppingsForPizza
   }
 
@@ -85,6 +96,7 @@ export const EditOrder = () => {
     <div className="create-order-container">
       {currentOrder.deliveryDriver !== null && (
         <div className="dropdown-container">
+          <div>Current: Driver {currentOrder.deliveryDriver}</div>
           <label>Change driver: </label>
           <select
             id="employeees-dropdown"
@@ -97,23 +109,27 @@ export const EditOrder = () => {
             {allEmployees.map((employeeObj) => {
               return (
                 <option className="employee" value={employeeObj.id}>
-                  {employeeObj.name}
+                  {employeeObj.id}. {employeeObj.name}
                 </option>
               )
             })}
           </select>
+          <button className="save-driver-btn" onClick={handleEditOrder}>
+            Save Driver
+          </button>
         </div>
       )}
       {currentOrder.deliveryDriver === null && (
         <div className="dropdown-container">
-          <label>Change Table #: </label>
+          <div>Current: Table #{currentOrder.tableNumber}</div>
+          <label>Change Table: </label>
           <select
             id="table-dropdown"
             className="dropdown"
             onChange={handleTableChange}
           >
             <option className="table-name" value="0">
-              Table
+              Table #
             </option>
             {tableNumbers.map((tableNum) => {
               return (
@@ -123,6 +139,9 @@ export const EditOrder = () => {
               )
             })}
           </select>
+          <button className="save-table-btn" onClick={handleEditOrder}>
+            Save Table
+          </button>
         </div>
       )}
 
