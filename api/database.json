@@ -2,19 +2,17 @@
   "employees": [
     {
       "id": 1,
-      "name": "John Doe",
-      "address": "123 Main St",
-      "phoneNumber": 1234567890,
-      "email": "john.doe@example.com",
-      "isAdmin": false
+      "name": "John `Scooby` Doo",
+      "address": "Mystery Machine behind Shepherd's Pies",
+      "phoneNumber": 1234567788,
+      "email": "john.dooby@mysteryinc.com"
     },
     {
       "id": 2,
-      "name": "Jane Smith",
+      "name": "Jane `The Jet` Smith",
       "address": "456 Oak Ave",
       "phoneNumber": 9876543210,
-      "email": "jane.smith@example.com",
-      "isAdmin": true
+      "email": "jetsetter@myspace.com"
     }
   ],
   "orders": [
@@ -23,21 +21,28 @@
       "employeeId": 1,
       "deliveryDriver": null,
       "tableNumber": 5,
-      "timestamp": "{datetime}"
+      "timestamp": "January 11, 2024 10:00 AM"
     },
     {
       "id": 2,
       "employeeId": 2,
       "deliveryDriver": null,
       "tableNumber": 17,
-      "timestamp": "{datetime}"
+      "timestamp": "January 11, 2024 1:32 PM"
     },
     {
       "id": 3,
       "employeeId": 2,
       "deliveryDriver": 1,
       "tableNumber": null,
-      "timestamp": "{datetime}"
+      "timestamp": "January 11, 2024 9:00 PM"
+    },
+    {
+      "id": 4,
+      "employeeId": 1,
+      "deliveryDriver": null,
+      "tableNumber": 0,
+      "timestamp": "2024-01-12T17:46:23.995Z"
     }
   ],
   "pizzas": [
@@ -89,13 +94,6 @@
       "cheeseId": 3,
       "sauceId": 3,
       "orderId": 3
-    },
-    {
-      "sizeId": "1",
-      "cheeseId": "1",
-      "sauceId": "2",
-      "orderId": 3,
-      "id": 8
     }
   ],
   "sizes": [
@@ -252,31 +250,6 @@
       "id": 14,
       "pizzaId": 7,
       "toppingId": 6
-    },
-    {
-      "toppingId": 1,
-      "pizzaId": 8,
-      "id": 15
-    },
-    {
-      "toppingId": 2,
-      "pizzaId": 8,
-      "id": 16
-    },
-    {
-      "toppingId": 6,
-      "pizzaId": 8,
-      "id": 17
-    },
-    {
-      "toppingId": 7,
-      "pizzaId": 8,
-      "id": 18
-    },
-    {
-      "toppingId": 8,
-      "pizzaId": 8,
-      "id": 19
     }
   ]
 }

@@ -52,7 +52,7 @@ export const EditOrder = () => {
 
   const getToppingsForPizza = (pizza) => {
     //check if pizza object is defined - if not return empty array
-    if (!pizza) {
+    if (!pizza || !allToppings || !pizzaToppings) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
