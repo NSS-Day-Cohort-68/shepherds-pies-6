@@ -13,8 +13,14 @@ export const OrderDetails = () => {
   const [pizzaToppings, setPizzaToppings] = useState([])
 
   const getToppingsForPizza = (pizza) => {
-   //check if pizza object is defined - if not return empty array
-    if (!pizza) {
+    //check if pizza object is defined - if not return empty array
+    if (!pizza || !allToppings || !pizzaToppings) {
+      console.error(
+        "Invalid pizza or toppings data:",
+        pizza,
+        allToppings,
+        pizzaToppings
+      )
       return []
     }
     //gets all the pizzaToppings with the pizzaId
@@ -55,7 +61,7 @@ export const OrderDetails = () => {
             .map((topping) => topping.topping)
             .join(", ")
           return (
-            <div className="pizzas-in-order">
+            <div className="pizzas-in-order" key={ordersPizzaObj.id}>
               <div>
                 A {ordersPizzaObj.size.size} pizza with{" "}
                 {ordersPizzaObj.cheese.cheese} cheese, and{" "}

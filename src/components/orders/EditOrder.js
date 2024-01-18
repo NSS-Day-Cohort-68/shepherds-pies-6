@@ -92,6 +92,7 @@ export const EditOrder = () => {
     <div className="create-order-container">
       {currentOrder.deliveryDriver !== null && (
         <div className="dropdown-container">
+          <div>Current: Driver {currentOrder.deliveryDriver}</div>
           <label>Change driver: </label>
           <select
             id="employeees-dropdown"
@@ -104,7 +105,7 @@ export const EditOrder = () => {
             {allEmployees.map((employeeObj) => {
               return (
                 <option className="employee" value={employeeObj.id}>
-                  {employeeObj.name}
+                  {employeeObj.id}. {employeeObj.name}
                 </option>
               )
             })}
@@ -116,14 +117,15 @@ export const EditOrder = () => {
       )}
       {currentOrder.deliveryDriver === null && (
         <div className="dropdown-container">
-          <label>Change Table #: </label>
+          <div>Current: Table #{currentOrder.tableNumber}</div>
+          <label>Change Table: </label>
           <select
             id="table-dropdown"
             className="dropdown"
             onChange={handleTableChange}
           >
             <option className="table-name" value="0">
-              Table
+              Table #
             </option>
             {tableNumbers.map((tableNum) => {
               return (

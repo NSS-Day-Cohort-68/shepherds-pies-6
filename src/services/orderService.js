@@ -17,9 +17,9 @@ export const deleteOrder = async (order) => {
 }
 
 export const getOrderById = async (orderId) => {
-  return await fetch(`http://localhost:8088/orders/${orderId}`).then((res) =>
-    res.json()
-  )
+  return await fetch(
+    `http://localhost:8088/orders/${orderId}`
+  ).then((res) => res.json())
 }
 
 export const editOrder = async (order) => {
