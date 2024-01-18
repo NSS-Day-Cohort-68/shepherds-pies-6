@@ -6,11 +6,7 @@ import {
   getPizzaToppings,
   getPizzasByOrderId,
 } from "../../services/pizzaService"
-import {
-  addNewOrder,
-  getAllOrders,
-  getOrderById,
-} from "../../services/orderService"
+import { getOrderById } from "../../services/orderService"
 import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
 

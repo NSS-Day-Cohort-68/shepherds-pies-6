@@ -1,34 +1,44 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { getEmployeeById } from "../../services/employeeService"
+import { useNavigate, useParams } from "react-router-dom"
+import "./EmployeeForm.css"
+import {
+  editEmployeeInfo,
+  getEmployeeById,
+} from "../../services/employeeService"
 
 export const EmployeeForm = () => {
   const [currentEmployee, setCurrentEmployee] = useState(undefined)
-  const [newName, setNewName] = useState("")
-  const [newAddress, setNewAddress] = useState("")
-  const [newPhoneNumber, setNewPhoneNumber] = useState(0)
-  const [newEmail, setNewEmail] = useState("")
-  const [newAdmin, setNewAdmin] = useState(false)
 
   const { employeeId } = useParams()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getEmployeeById(employeeId).then((data) => {
       setCurrentEmployee(data)
     })
   }, [employeeId])
+  console.log(currentEmployee)
 
   const handleEmployeeEdit = (event) => {
     event.preventDefault()
     const newEmployeeObj = {
-      name: newName,
-      address: newAddress,
-      phoneNumber: newPhoneNumber,
-      email: newEmail,
+      id: currentEmployee.id,
+      name: currentEmployee.name,
+      address: currentEmployee.address,
+      phoneNumber: parseInt(currentEmployee.phoneNumber),
+      email: currentEmployee.email,
       // isAdmin:,
     }
+    editEmployeeInfo(newEmployeeObj).then(() => {
+      navigate(`/employees`)
+    })
   }
-  console.log(currentEmployee)
+  const handleInputChange = (event) => {
+    const stateCopy = { ...currentEmployee }
+    stateCopy[event.target.name] = event.target.value
+    setCurrentEmployee(stateCopy)
+  }
 
   return (
     <form>
@@ -39,12 +49,10 @@ export const EmployeeForm = () => {
           <input
             type="text"
             name="name"
-            value={currentEmployee?.name}
-            onChange={(event) => {
-              setNewName(event.target.value)
-            }}
             required
             className="form-control"
+            value={currentEmployee?.name}
+            onChange={handleInputChange}
           />
         </div>
       </fieldset>
@@ -54,10 +62,10 @@ export const EmployeeForm = () => {
           <input
             type="text"
             name="address"
-            value={currentEmployee?.address}
-            onChange={<></>}
             required
             className="form-control"
+            value={currentEmployee?.address}
+            onChange={handleInputChange}
           />
         </div>
       </fieldset>
@@ -65,12 +73,12 @@ export const EmployeeForm = () => {
         <div className="form-group">
           <label>Phone Number:</label>
           <input
-            type="number"
-            name="phone"
-            value={currentEmployee?.phoneNumber}
-            onChange={<></>}
+            type="text"
+            name="phoneNumber"
             required
             className="form-control"
+            value={currentEmployee?.phoneNumber}
+            onChange={handleInputChange}
           />
         </div>
       </fieldset>
@@ -80,16 +88,16 @@ export const EmployeeForm = () => {
           <input
             type="text"
             name="email"
-            value={currentEmployee?.email}
-            onChange={<></>}
             required
             className="form-control"
+            value={currentEmployee?.email}
+            onChange={handleInputChange}
           />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <button className="form-btn btn-primary" onClick={<></>}>
+          <button className="form-btn btn-primary" onClick={handleEmployeeEdit}>
             Save Profile
           </button>
         </div>
