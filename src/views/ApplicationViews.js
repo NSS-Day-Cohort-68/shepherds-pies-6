@@ -6,48 +6,67 @@ import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
 import { SalesList } from "../components/sales/SalesList.js"
 import { CreatePizza } from "../components/pizzas/CreatePizza"
+import { EditOrder } from "../components/orders/EditOrder.js"
+import { OrderDetails } from "../components/orders/OrderDetails.js"
+import { EmployeeForm } from "../components/forms/EmployeeForm.js"
 
 
 export const ApplicationViews = () => {
-	const [currentUser, setCurrentUser] = useState({})
-	const [currentOrderID, setCurrentOrderID] = useState(0)
+  const [currentUser, setCurrentUser] = useState({})
+  const [currentOrderID, setCurrentOrderID] = useState(0)
 
-	useEffect(() => {
-		// get logged in user from local storage
-		const localUser = localStorage.getItem("shepard_user")
-		setCurrentUser(JSON.parse(localUser)) // { id: n }
-	}, [])
+  useEffect(() => {
+    // get logged in user from local storage
+    const localUser = localStorage.getItem("shepard_user")
+    setCurrentUser(JSON.parse(localUser)) // { id: n }
+  }, [])
 
-	return (
-		<Routes>
-			<Route
-				path="/"
-				element={
-					<>
-						<NavBar />
-						<Outlet />
-					</>
-				}
-			>
-				<Route index element={<OrdersList />} />
-				<Route path="allOrders" element={<OrdersList />} />
-				<Route
-					path="showOrder"
-					element={
-						<ShowOrder
-							currentUser={currentUser}
-							setCurrentOrderID={setCurrentOrderID}
-							currentOrderID={currentOrderID}
-						/>
-					}
-				/>
-				<Route path="employees" element={<EmployeesList />} />
-				<Route path="salesReport" element={<SalesList />} />
-				<Route
-					path="createPizza"
-					element={<CreatePizza currentOrderID={currentOrderID} />}
-				/>
-			</Route>
-		</Routes>
-	)
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <NavBar />
+            <Outlet />
+          </>
+        }
+      >
+        <Route index element={<OrdersList />} />
+
+        <Route path="allOrders">
+          <Route index element={<OrdersList />} />
+          <Route path=":orderId" element={<OrderDetails />} />
+        </Route>
+
+        <Route path="editOrder">
+          <Route path=":orderId" element={<EditOrder />} />
+        </Route>
+
+        <Route
+          path="showOrder"
+          element={
+            <ShowOrder
+              currentUser={currentUser}
+              setCurrentOrderID={setCurrentOrderID}
+              currentOrderID={currentOrderID}
+            />
+          }
+        />
+        <Route
+          path="employees"
+          element={<EmployeesList currentUser={currentUser} />}
+        />
+        <Route path="salesReport" element={<SalesList />} />
+        <Route
+          path="createPizza"
+          element={<CreatePizza currentOrderID={currentOrderID} />}
+        />
+        <Route
+          path="employee-detail-form/:employeeId"
+          element={<EmployeeForm />}
+        />
+      </Route>
+    </Routes>
+  )
 }

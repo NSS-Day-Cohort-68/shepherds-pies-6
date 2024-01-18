@@ -1,53 +1,39 @@
 import { useEffect, useState } from "react"
 import {
+  deletePizza,
+  deleteToppingsForPizza,
   getAllToppings,
-  getPizzasByOrderId,
   getPizzaToppings,
+  getPizzasByOrderId,
 } from "../../services/pizzaService"
-import { addNewOrder, getAllOrders } from "../../services/orderService"
-import { Link } from "react-router-dom"
+import { editOrder, getOrderById } from "../../services/orderService"
+import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
 
-//Order page - add pizzas and edit table number or delivery driver
-export const ShowOrder = ({
-  currentUser,
-  setCurrentOrderID,
-  currentOrderID,
-}) => {
+export const EditOrder = () => {
+  const { orderId } = useParams()
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
-  const [allOrders, setAllOrders] = useState([])
+  const [currentOrder, setCurrentOrder] = useState([])
   const [allToppings, setAllToppings] = useState([])
   const [pizzaToppings, setPizzaToppings] = useState([])
-  const [isNewOrderCreated, setIsNewOrderCreated] = useState(false)
-  const [deliveryType, setDeliveryType] = useState("")
   const [driverSelection, setDriverSelection] = useState(null)
   const [tableNumberSelection, setTableNumberSelection] = useState(0)
   const [allEmployees, setAllEmployees] = useState([])
   const tableNumbers = []
 
-  for (let i = 1; i <= 20; i++) {
-    tableNumbers.push(i)
-  }
-
-  const handleAddNewOrder = (event) => {
-    const newOrderObj = {
-      id: allOrders.length + 1,
-      employeeId: currentUser.id,
+  const handleEditOrder = (event) => {
+    const orderObj = {
+      id: orderId,
+      employeeId: currentOrder.employeeId,
       deliveryDriver: driverSelection,
       tableNumber: tableNumberSelection,
-      timestamp: new Date(),
+      timestamp: currentOrder.timestamp,
     }
 
-    addNewOrder(newOrderObj)
-    setCurrentOrderID(newOrderObj.id)
-    setIsNewOrderCreated(true)
+    editOrder(orderObj)
   }
-
-  const handleDeliveryTypeChange = (event) => {
-    setDeliveryType(event.target.value)
-    //resets if the delivery type is changed
-    setTableNumberSelection(0)
-    setDriverSelection(null)
+  for (let i = 1; i <= 20; i++) {
+    tableNumbers.push(i)
   }
 
   const handleEmployeeChange = (event) => {
@@ -56,6 +42,12 @@ export const ShowOrder = ({
 
   const handleTableChange = (event) => {
     setTableNumberSelection(event.target.value)
+  }
+
+  const getAndSetPizzas = (orderId) => {
+    getPizzasByOrderId(orderId).then((currentPizzas) => {
+      setCurrentOrdersPizzas(currentPizzas)
+    })
   }
 
   const getToppingsForPizza = (pizza) => {
@@ -78,9 +70,6 @@ export const ShowOrder = ({
   }
 
   useEffect(() => {
-    getAllOrders().then((ordersArr) => {
-      setAllOrders(ordersArr)
-    })
     getAllToppings().then((toppingsArr) => {
       setAllToppings(toppingsArr)
     })
@@ -93,41 +82,18 @@ export const ShowOrder = ({
   }, [])
 
   useEffect(() => {
-    //only fetch pizzas after a new order is created
-    if (isNewOrderCreated) {
-      getPizzasByOrderId(currentOrderID).then((currentPizzas) => {
-        setCurrentOrdersPizzas(currentPizzas)
-      })
-    }
-  }, [currentOrderID, isNewOrderCreated])
+    getAndSetPizzas(orderId)
+    getOrderById(orderId).then((order) => {
+      setCurrentOrder(order)
+    })
+  }, [orderId])
 
   return (
     <div className="create-order-container">
-      <div className="delivery-radio-container">
-        <h4>Select order type:</h4>
-        <label className="delivery-radio">
-          <input
-            type="radio"
-            value="table"
-            checked={deliveryType === "table"}
-            onChange={handleDeliveryTypeChange}
-          />
-          Dine-In
-        </label>
-        <label className="delivery-radio">
-          <input
-            type="radio"
-            value="delivery"
-            checked={deliveryType === "delivery"}
-            onChange={handleDeliveryTypeChange}
-          />
-          Delivery
-        </label>
-      </div>
-
-      {deliveryType === "delivery" && (
+      {currentOrder.deliveryDriver !== null && (
         <div className="dropdown-container">
-          <label>Select a driver: </label>
+          <div>Current: Driver {currentOrder.deliveryDriver}</div>
+          <label>Change driver: </label>
           <select
             id="employeees-dropdown"
             className="dropdown"
@@ -139,23 +105,27 @@ export const ShowOrder = ({
             {allEmployees.map((employeeObj) => {
               return (
                 <option className="employee" value={employeeObj.id}>
-                  {employeeObj.name}
+                  {employeeObj.id}. {employeeObj.name}
                 </option>
               )
             })}
           </select>
+          <button className="save-driver-btn" onClick={handleEditOrder}>
+            Save Driver
+          </button>
         </div>
       )}
-      {deliveryType === "table" && (
+      {currentOrder.deliveryDriver === null && (
         <div className="dropdown-container">
-          <label>Select a Table #: </label>
+          <div>Current: Table #{currentOrder.tableNumber}</div>
+          <label>Change Table: </label>
           <select
             id="table-dropdown"
             className="dropdown"
             onChange={handleTableChange}
           >
             <option className="table-name" value="0">
-              Table
+              Table #
             </option>
             {tableNumbers.map((tableNum) => {
               return (
@@ -165,49 +135,52 @@ export const ShowOrder = ({
               )
             })}
           </select>
+          <button className="save-table-btn" onClick={handleEditOrder}>
+            Save Table
+          </button>
         </div>
       )}
 
-      <button className="create-order-btn" onClick={handleAddNewOrder}>
-        New Order
-      </button>
       <div className="pizzas-in-order-container">
         {currentOrdersPizzas.map((ordersPizzaObj) => {
           const toppingString = getToppingsForPizza(ordersPizzaObj)
             .map((topping) => topping.topping)
             .join(", ")
           return (
-            <div className="pizzas-in-order">
+            <div className="pizzas-details">
               <div>
-                A {ordersPizzaObj.size.size} pizza with{" "}
-                {ordersPizzaObj.cheese.cheese} cheese, and{" "}
-                {ordersPizzaObj.sauce.sauce} sauce
+                <i
+                  className="delete-btn fa-solid fa-trash"
+                  onClick={async () => {
+                    await deletePizza(ordersPizzaObj)
+                    await deleteToppingsForPizza(ordersPizzaObj)
+                    getAndSetPizzas(orderId)
+                  }}
+                ></i>
               </div>
-              <div> Toppings: {toppingString} </div>
+              <div className="pizzas-in-order">
+                <div>
+                  A {ordersPizzaObj.size.size} pizza with{" "}
+                  {ordersPizzaObj.cheese.cheese} cheese, and{" "}
+                  {ordersPizzaObj.sauce.sauce} sauce
+                </div>
+                <div> Toppings: {toppingString} </div>
+              </div>
+              <div className="pizza-price">$00.00</div>
             </div>
           )
         })}
-        <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
-          {isNewOrderCreated ? (
-            <Link to="/createPizza" disabled={!isNewOrderCreated}>
-              New Pizza
-            </Link>
-          ) : (
-            <span>New Pizza</span>
-          )}
+        <button className="add-new-pizza-btn">
+          <Link to="/createPizza">New Pizza</Link>
         </button>
       </div>
       <div className="order-footer-container">
         <div className="order-total">Total:</div>
-        <div className="order-total">$00.00</div>
+        <div className="order-total">${}</div>
       </div>
       <div className="order-footer-container">
-        <button className="all-orders-btn" disabled={!isNewOrderCreated}>
-          {isNewOrderCreated ? (
-            <Link to="/allOrders">All Orders</Link>
-          ) : (
-            <span>All Orders</span>
-          )}
+        <button className="all-orders-btn">
+          <Link to="/allOrders">All Orders</Link>
         </button>
       </div>
     </div>

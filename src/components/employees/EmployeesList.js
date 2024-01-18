@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { getAllEmployees } from "../../services/employeeService"
 import { Employee } from "./Employee"
+
 import "./Employee.css"
 
-export const EmployeesList = () => {
+export const EmployeesList = ({ currentUser }) => {
   const [allEmployees, setAllEmployees] = useState([])
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export const EmployeesList = () => {
     <article className="employees">
       <h2 className="header">Employees</h2>
       {allEmployees.map((employeeObj) => {
-        return <Employee employee={employeeObj} key={employeeObj.id} />
+        return <Employee currentUser={currentUser} employee={employeeObj} />
       })}
     </article>
   )
