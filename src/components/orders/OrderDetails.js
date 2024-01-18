@@ -15,12 +15,6 @@ export const OrderDetails = () => {
   const getToppingsForPizza = (pizza) => {
     //check if pizza object is defined - if not return empty array
     if (!pizza || !allToppings || !pizzaToppings) {
-      console.error(
-        "Invalid pizza or toppings data:",
-        pizza,
-        allToppings,
-        pizzaToppings
-      )
       return []
     }
     //gets all the pizzaToppings with the pizzaId

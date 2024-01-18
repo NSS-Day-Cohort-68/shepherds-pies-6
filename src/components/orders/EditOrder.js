@@ -6,11 +6,7 @@ import {
   getPizzaToppings,
   getPizzasByOrderId,
 } from "../../services/pizzaService"
-<<<<<<< HEAD
-import { getOrderById } from "../../services/orderService"
-=======
 import { editOrder, getOrderById } from "../../services/orderService"
->>>>>>> 198cd5bf3c4f0826ef9d8d17866d908b669ee74c
 import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
 
@@ -56,7 +52,7 @@ export const EditOrder = () => {
 
   const getToppingsForPizza = (pizza) => {
     //check if pizza object is defined - if not return empty array
-    if (!pizza) {
+    if (!pizza || !allToppings || !pizzaToppings) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
