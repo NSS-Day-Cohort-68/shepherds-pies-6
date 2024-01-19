@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react"
-import {
-	getAllToppings,
-	getPizzasByOrderId,
-	getPizzaToppings,
-} from "../../services/pizzaService"
+import { getAllToppings, getPizzasByOrderId, getPizzaToppings } from "../../services/pizzaService"
 import { addNewOrder, getAllOrders } from "../../services/orderService"
-import { Link } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
+import { useNavigate } from "react-router-dom"
 
 //Order page - add pizzas and edit table number or delivery driver
-export const ShowOrder = ({
-	currentUser,
-	setCurrentOrderID,
-	currentOrderID,
-}) => {
+export const ShowOrder = ({ currentUser, setCurrentOrderID, currentOrderID }) => {
+	const navigate = useNavigate()
+
 	const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
 	const [allOrders, setAllOrders] = useState([])
 	const [allToppings, setAllToppings] = useState([])
@@ -51,9 +45,10 @@ export const ShowOrder = ({
 			timestamp: formattedDate,
 		}
 
-		addNewOrder(newOrderObj)
-		setCurrentOrderID(newOrderObj.id)
-		setIsNewOrderCreated(true)
+		addNewOrder(newOrderObj).then((res) => {
+			setCurrentOrderID(res.id)
+			navigate(`/editOrder/${res.id}`)
+		})
 	}
 
 	const handleDeliveryTypeChange = (event) => {
@@ -83,9 +78,7 @@ export const ShowOrder = ({
 		const toppingsForPizza = pizzaToppings
 			.filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
 			.map((pizzaTopping) => pizzaTopping.toppingId)
-			.map((toppingId) =>
-				allToppings.find((topping) => topping.id === toppingId)
-			)
+			.map((toppingId) => allToppings.find((topping) => topping.id === toppingId))
 
 		return toppingsForPizza
 	}
@@ -97,9 +90,7 @@ export const ShowOrder = ({
 		getAllToppings().then((toppingsArr) => {
 			setAllToppings(toppingsArr)
 		})
-		getPizzaToppings().then((pizzaToppingsArr) =>
-			setPizzaToppings(pizzaToppingsArr)
-		)
+		getPizzaToppings().then((pizzaToppingsArr) => setPizzaToppings(pizzaToppingsArr))
 		getAllEmployees().then((employeesArr) => {
 			setAllEmployees(employeesArr)
 		})
@@ -142,7 +133,7 @@ export const ShowOrder = ({
 				<div className="dropdown-container">
 					<label>Select a driver: </label>
 					<select
-						id="employees-dropdown"
+						id="employeees-dropdown"
 						className="dropdown"
 						onChange={handleEmployeeChange}
 					>
@@ -162,11 +153,7 @@ export const ShowOrder = ({
 			{deliveryType === "table" && (
 				<div className="dropdown-container">
 					<label>Select a Table #: </label>
-					<select
-						id="table-dropdown"
-						className="dropdown"
-						onChange={handleTableChange}
-					>
+					<select id="table-dropdown" className="dropdown" onChange={handleTableChange}>
 						<option className="table-name" value="0">
 							Table
 						</option>
@@ -180,48 +167,50 @@ export const ShowOrder = ({
 					</select>
 				</div>
 			)}
+			{/* {currentOrdersPizzas.map((ordersPizzaObj) => {
+			  const toppingString = getToppingsForPizza(ordersPizzaObj)
+				.map((topping) => topping.topping)
+				.join(", ")
+			  return (
+				<div className="pizzas-in-order">
+				  <div>
+					A {ordersPizzaObj.size.size} pizza with{" "}
+					{ordersPizzaObj.cheese.cheese} cheese, and{" "}
+					{ordersPizzaObj.sauce.sauce} sauce
+				  </div>
+				  <div> Toppings: {toppingString} </div>
+				</div>
+			  )
+			})} */}
 
 			<button className="create-order-btn" onClick={handleAddNewOrder}>
 				New Order
 			</button>
-			<div className="pizzas-in-order-container">
-				{currentOrdersPizzas.map((ordersPizzaObj) => {
-					const toppingString = getToppingsForPizza(ordersPizzaObj)
-						.map((topping) => topping.topping)
-						.join(", ")
-					return (
-						<div className="pizzas-in-order">
-							<div>
-								A {ordersPizzaObj.size.size} pizza with{" "}
-								{ordersPizzaObj.cheese.cheese} cheese, and{" "}
-								{ordersPizzaObj.sauce.sauce} sauce
-							</div>
-							<div> Toppings: {toppingString} </div>
-						</div>
-					)
-				})}
-				<button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
-					{isNewOrderCreated ? (
-						<Link to="/createPizza" disabled={!isNewOrderCreated}>
-							New Pizza
-						</Link>
-					) : (
-						<span>New Pizza</span>
-					)}
-				</button>
-			</div>
+			{/* <div className="pizzas-in-order-container">
+			
+			<button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
+			  {isNewOrderCreated ? (
+				<Link to="/createPizza" disabled={!isNewOrderCreated}>
+				  New Pizza
+				</Link>
+			  ) : (
+				<span>New Pizza</span>
+			  )}
+			</button>
+			</div> */}
+
+			{/* <div className="order-footer-container">
+			<div className="order-total">Total:</div>
+			<div className="order-total">$00.00</div>
+		  </div> */}
 			<div className="order-footer-container">
-				<div className="order-total">Total:</div>
-				<div className="order-total">$00.00</div>
-			</div>
-			<div className="order-footer-container">
-				<button className="all-orders-btn" disabled={!isNewOrderCreated}>
-					{isNewOrderCreated ? (
-						<Link to="/allOrders">All Orders</Link>
-					) : (
-						<span>All Orders</span>
-					)}
-				</button>
+				{/* <button className="all-orders-btn" disabled={!isNewOrderCreated}>
+			  {isNewOrderCreated ? (
+				<Link to="/allOrders">All Orders</Link>
+			  ) : (
+				<span>All Orders</span>
+			  )}
+			</button> */}
 			</div>
 		</div>
 	)

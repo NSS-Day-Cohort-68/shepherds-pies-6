@@ -8,12 +8,9 @@ import { OrdersList } from "../components/orders/OrdersList.js"
 import { EmployeesList } from "../components/employees/EmployeesList.js"
 import { SalesList } from "../components/sales/SalesList.js"
 import { SalesListTwo } from "../components/sales/SalesList2.js"
+import { EmployeeForm } from "../components/forms/EmployeeForm.js"
 
-export const AdminViews = ({
-	currentUser,
-	setCurrentOrderID,
-	currentOrderID,
-}) => {
+export const AdminViews = ({ currentUser, setCurrentOrderID, currentOrderID }) => {
 	return (
 		<Routes>
 			<Route
@@ -48,6 +45,7 @@ export const AdminViews = ({
 				/>
 
 				<Route path="employees" element={<EmployeesList />} />
+				<Route path="employee-detail-form/:employeeId" element={<EmployeeForm />} />
 				<Route path="salesReport" element={<SalesList />} />
 				<Route
 					path="createPizza"

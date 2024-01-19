@@ -1,19 +1,14 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { AdminNav } from "../components/nav/AdminNav.js"
 import { CreatePizza } from "../components/pizzas/CreatePizza.js"
 import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EditOrder } from "../components/orders/EditOrder.js"
 import { OrderDetails } from "../components/orders/OrderDetails.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
 import { EmployeeNav } from "../components/nav/EmployeeNav.js"
-// import { EmployeesList } from "../components/employees/EmployeesList.js"
-// import { SalesList } from "../components/sales/SalesList.js"
+import { EmployeesList } from "../components/employees/EmployeesList.js"
+import { EmployeeForm } from "../components/forms/EmployeeForm.js"
 
-export const EmployeeViews = ({
-	currentUser,
-	setCurrentOrderID,
-	currentOrderID,
-}) => {
+export const EmployeeViews = ({ currentUser, setCurrentOrderID, currentOrderID }) => {
 	return (
 		<Routes>
 			<Route
@@ -47,12 +42,12 @@ export const EmployeeViews = ({
 					}
 				/>
 
-				{/* <Route path="employees" element={<EmployeesList />} />
-			<Route path="salesReport" element={<SalesList />} /> */}
+				<Route path="employees" element={<EmployeesList />} />
 				<Route
 					path="createPizza"
 					element={<CreatePizza currentOrderID={currentOrderID} />}
 				/>
+				<Route path="employee-detail-form/:employeeId" element={<EmployeeForm />} />
 			</Route>
 		</Routes>
 	)

@@ -38,14 +38,10 @@ export const OrdersList = () => {
 	return (
 		<article className="orders">
 			<h2 className="header">Order History</h2>
-			<Months setMonth={setSelectedMonth} />
+			<Months setSelectedMonth={setSelectedMonth} />
 			{filteredOrders.map((orderObj) => {
 				return (
-					<Order
-						key={orderObj.id}
-						order={orderObj}
-						getAndSetOrders={getAndSetOrders}
-					/>
+					<Order key={orderObj.id} order={orderObj} getAndSetOrders={getAndSetOrders} />
 				)
 			})}
 		</article>

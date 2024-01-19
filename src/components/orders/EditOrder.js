@@ -14,13 +14,13 @@ export const EditOrder = () => {
 	const { editOrderId } = useParams()
 
 	const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
-	const [currentOrder, setCurrentOrder] = useState([])
+	const [currentOrder, setCurrentOrder] = useState({})
 	const [allToppings, setAllToppings] = useState([])
 	const [pizzaToppings, setPizzaToppings] = useState([])
 	const [driverSelection, setDriverSelection] = useState(null)
 	const [tableNumberSelection, setTableNumberSelection] = useState(0)
 	const [allEmployees, setAllEmployees] = useState([])
-	const [orderId, setOrderId] = useState("")
+	const [orderId, setOrderId] = useState(0)
 	const tableNumbers = []
 
 	const handleEditOrder = (event) => {
@@ -65,9 +65,7 @@ export const EditOrder = () => {
 		const toppingsForPizza = pizzaToppings
 			.filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
 			.map((pizzaTopping) => pizzaTopping.toppingId)
-			.map((toppingId) =>
-				allToppings.find((topping) => topping.id === toppingId)
-			)
+			.map((toppingId) => allToppings.find((topping) => topping.id === toppingId))
 
 		return toppingsForPizza
 	}
@@ -76,9 +74,7 @@ export const EditOrder = () => {
 		getAllToppings().then((toppingsArr) => {
 			setAllToppings(toppingsArr)
 		})
-		getPizzaToppings().then((pizzaToppingsArr) =>
-			setPizzaToppings(pizzaToppingsArr)
-		)
+		getPizzaToppings().then((pizzaToppingsArr) => setPizzaToppings(pizzaToppingsArr))
 		getAllEmployees().then((employeesArr) => {
 			setAllEmployees(employeesArr)
 		})
@@ -86,10 +82,14 @@ export const EditOrder = () => {
 	}, [])
 
 	useEffect(() => {
-		getAndSetPizzas(orderId)
-		getOrderById(orderId).then((order) => {
-			setCurrentOrder(order)
-		})
+		//!
+		if (orderId !== 0 && orderId !== undefined) {
+			getAndSetPizzas(orderId)
+			getOrderById(orderId).then((order) => {
+				setCurrentOrder(order)
+				console.log(order) //!
+			})
+		}
 	}, [orderId])
 
 	return (
@@ -123,11 +123,7 @@ export const EditOrder = () => {
 				<div className="dropdown-container">
 					<div>Current: Table #{currentOrder.tableNumber}</div>
 					<label>Change Table: </label>
-					<select
-						id="table-dropdown"
-						className="dropdown"
-						onChange={handleTableChange}
-					>
+					<select id="table-dropdown" className="dropdown" onChange={handleTableChange}>
 						<option className="table-name" value="0">
 							Table #
 						</option>
