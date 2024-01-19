@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    border: 1px dotted black;
+    margin-top: 30px;
 }
 
 .createPizza-block-container {
@@ -14,12 +14,11 @@
 .createPizza-choices-block {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    border: 1px dotted black;
-}
-
-.createPizza-choices-header {
-    border: 1px dotted black;
+    align-items: center;
+    align-content: flex-start;
+    flex-basis: 18%;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 .createPizza-choices-list {
@@ -27,17 +26,23 @@
     flex-direction: column;
     justify-content: space-evenly;
     list-style-type: none;
-    border: 1px dotted black;
-}
-
-.createPizza-choices-item {
-    border: 1px dotted black;
 }
 
 .createPizza-toppings-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+}
+
+.createPizza-toppings-block {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 18%;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 .createPizza-btns-container {

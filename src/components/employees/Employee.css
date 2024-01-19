@@ -1,41 +1,45 @@
 .employee {
-    display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
 }
 
 .employee-block {
-    display: flex;
-    flex-direction: column; /* Display items in a column layout */
-    align-items: center; /* Align items horizontally in the center */
-    margin-right: 20px; /* Adjust the margin as needed for spacing between the blocks */
-    margin-bottom: 20px; /* Add margin below each order block for spacing */
-    border: 2px solid #ccc; /* Border color */
-    padding: 10px; /* Padding around the text */
-    border-radius: 8px; /* Border radius for rounded corners */
-    width: 800px; /* Set a fixed width for each block */
+  display: flex;
+  flex-direction: column; /* Display items in a column layout */
+  align-items: center; /* Align items horizontally in the center */
+  margin-right: 20px; /* Adjust the margin as needed for spacing between the blocks */
+  margin-bottom: 20px; /* Add margin below each order block for spacing */
+  border: 2px solid #ccc; /* Border color */
+  padding: 10px; /* Padding around the text */
+  border-radius: 8px; /* Border radius for rounded corners */
+  width: 800px; /* Set a fixed width for each block */
 }
 
 .employee-name {
-    margin-top: 5px; /* Add margin above Order # and Date for spacing */
-    margin-bottom: 5px; /* Add margin below Order # and Date for spacing */
+  margin-top: 5px; /* Add margin above Order # and Date for spacing */
+  margin-bottom: 5px; /* Add margin below Order # and Date for spacing */
 }
 
 .employee-name::after {
-    margin-right: 5px; /* Adjust the margin as needed */
-  }
-  
+  margin-right: 5px; /* Adjust the margin as needed */
+}
+
 .employees {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Add other styling as needed */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Add other styling as needed */
+}
+
 .header {
-    /* Add styles for centering the heading */
-    text-align: center;
-    margin-bottom: 20px; /* Adjust the margin as needed for spacing */
-  }
+  /* Add styles for centering the heading */
+  text-align: center;
+  margin-bottom: 20px; /* Adjust the margin as needed for spacing */
+}
+fieldset {
+  border: none;
+}
+
   

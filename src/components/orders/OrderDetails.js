@@ -13,22 +13,21 @@ export const OrderDetails = () => {
   const [pizzaToppings, setPizzaToppings] = useState([])
 
   const getToppingsForPizza = (pizza) => {
-    //pizza object is defined 
-    if (!pizza) {
+    //check if pizza object is defined - if not return empty array
+    if (!pizza || !allToppings || !pizzaToppings) {
       return []
     }
     //gets all the pizzaToppings with the pizzaId
-    const pizzaToppingsForPizza = pizzaToppings.filter(
-      (pizzaTopping) => pizzaTopping.pizzaId === pizza.id
-    )
     //then map each pizzaTopping to get the toppingId
-    const toppingIds = pizzaToppingsForPizza.map(
-      (pizzaTopping) => pizzaTopping.toppingId
-    )
-    //then for each toppingId we want to compare it to the topping id and return the topping for that pizza
-    const toppingsForPizza = toppingIds.map((toppingId) =>
-      allToppings.find((topping) => topping.id === toppingId)
-    )
+    //then for each toppingId we want to compare toppingId to
+    //the topping id and return the topping for that pizza
+    const toppingsForPizza = pizzaToppings
+      .filter((pizzaTopping) => pizzaTopping.pizzaId === pizza.id)
+      .map((pizzaTopping) => pizzaTopping.toppingId)
+      .map((toppingId) =>
+        allToppings.find((topping) => topping.id === toppingId)
+      )
+
     return toppingsForPizza
   }
 
@@ -56,7 +55,7 @@ export const OrderDetails = () => {
             .map((topping) => topping.topping)
             .join(", ")
           return (
-            <div className="pizzas-in-order">
+            <div className="pizzas-in-order" key={ordersPizzaObj.id}>
               <div>
                 A {ordersPizzaObj.size.size} pizza with{" "}
                 {ordersPizzaObj.cheese.cheese} cheese, and{" "}
