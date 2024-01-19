@@ -89,20 +89,6 @@
 			"cheeseId": 3,
 			"sauceId": 3,
 			"orderId": 3
-		},
-		{
-			"sizeId": "1",
-			"cheeseId": "1",
-			"sauceId": "2",
-			"orderId": 3,
-			"id": 8
-		},
-		{
-			"sizeId": "1",
-			"cheeseId": "3",
-			"sauceId": "1",
-			"orderId": 3,
-			"id": 9
 		}
 	],
 	"sizes": [

@@ -5,11 +5,11 @@ import { ShowOrder } from "../components/orders/CreateOrder.js"
 import { EditOrder } from "../components/orders/EditOrder.js"
 import { OrderDetails } from "../components/orders/OrderDetails.js"
 import { OrdersList } from "../components/orders/OrdersList.js"
-import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesList.js"
-import { SalesListTwo } from "../components/sales/SalesList2.js"
+import { EmployeeNav } from "../components/nav/EmployeeNav.js"
+// import { EmployeesList } from "../components/employees/EmployeesList.js"
+// import { SalesList } from "../components/sales/SalesList.js"
 
-export const AdminViews = ({
+export const EmployeeViews = ({
 	currentUser,
 	setCurrentOrderID,
 	currentOrderID,
@@ -20,7 +20,7 @@ export const AdminViews = ({
 				path="/"
 				element={
 					<>
-						<AdminNav />
+						<EmployeeNav />
 						<Outlet />
 					</>
 				}
@@ -47,13 +47,12 @@ export const AdminViews = ({
 					}
 				/>
 
-				<Route path="employees" element={<EmployeesList />} />
-				<Route path="salesReport" element={<SalesList />} />
+				{/* <Route path="employees" element={<EmployeesList />} />
+			<Route path="salesReport" element={<SalesList />} /> */}
 				<Route
 					path="createPizza"
 					element={<CreatePizza currentOrderID={currentOrderID} />}
 				/>
-				<Route path="salesReport2" element={<SalesListTwo />} />
 			</Route>
 		</Routes>
 	)

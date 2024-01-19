@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
-import { Outlet, Route, Routes } from "react-router-dom"
-import { NavBar } from "../components/nav/NavBar.js"
-import { OrdersList } from "../components/orders/OrdersList.js"
-import { ShowOrder } from "../components/orders/CreateOrder.js"
-import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesList.js"
-import { CreatePizza } from "../components/pizzas/CreatePizza"
-import { EditOrder } from "../components/orders/EditOrder.js"
-import { OrderDetails } from "../components/orders/OrderDetails.js"
+import { AdminViews } from "./AdminViews.js"
+import { EmployeeViews } from "./EmployeeViews.js"
 
 export const ApplicationViews = () => {
 	const [currentUser, setCurrentUser] = useState({})
@@ -15,50 +8,71 @@ export const ApplicationViews = () => {
 
 	useEffect(() => {
 		// get logged in user from local storage
-		const localUser = localStorage.getItem("shepard_user")
-		setCurrentUser(JSON.parse(localUser)) // { id: n }
+		const localShepardUser = localStorage.getItem("shepard_user")
+		const shepardUserObj = JSON.parse(localShepardUser)
+
+		setCurrentUser(shepardUserObj)
 	}, [])
 
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <NavBar />
-            <Outlet />
-          </>
-        }
-      >
-        <Route index element={<OrdersList />} />
+	if (currentUser.isAdmin) {
+		return (
+			<AdminViews
+				currentUser={currentUser}
+				setCurrentOrderID={setCurrentOrderID}
+				currentOrderID={currentOrderID}
+			/>
+		)
+	} else {
+		return (
+			<EmployeeViews
+				currentUser={currentUser}
+				setCurrentOrderID={setCurrentOrderID}
+				currentOrderID={currentOrderID}
+			/>
+		)
+	}
 
-        <Route path="allOrders">
-          <Route index element={<OrdersList />} />
-          <Route path=":orderId" element={<OrderDetails />} />
-        </Route>
+	// return (
+	// 	<Routes>
+	// 		<Route
+	// 			path="/"
+	// 			element={
+	// 				<>
+	// 					{currentUser.isAdmin ? <AdminNav /> : <EmployeeNav />}
+	// 					<Outlet />
+	// 				</>
+	// 			}
+	// 		>
+	// 			<Route index element={<OrdersList />} />
 
-        <Route path="editOrder">
-          <Route path=":orderId" element={<EditOrder />} />
-        </Route>
-        
-        <Route
-          path="showOrder"
-          element={
-            <ShowOrder
-              currentUser={currentUser}
-              setCurrentOrderID={setCurrentOrderID}
-              currentOrderID={currentOrderID}
-            />
-          }
-        />
+	// 			<Route path="allOrders">
+	// 				<Route index element={<OrdersList />} />
+	// 				<Route path=":orderId" element={<OrderDetails />} />
+	// 			</Route>
 
-        <Route path="employees" element={<EmployeesList />} />
-        <Route path="salesReport" element={<SalesList />} />
-        <Route
-          path="createPizza"
-          element={<CreatePizza currentOrderID={currentOrderID} />}
-        />
-      </Route>
-    </Routes>
-  )
+	// 			<Route path="editOrder">
+	// 				<Route path=":orderId" element={<EditOrder />} />
+	// 			</Route>
+
+	// 			<Route
+	// 				path="showOrder"
+	// 				element={
+	// 					<ShowOrder
+	// 						currentUser={currentUser}
+	// 						setCurrentOrderID={setCurrentOrderID}
+	// 						currentOrderID={currentOrderID}
+	// 					/>
+	// 				}
+	// 			/>
+
+	// 			<Route path="employees" element={<EmployeesList />} />
+	// 			<Route path="salesReport" element={<SalesList />} />
+	// 			<Route
+	// 				path="createPizza"
+	// 				element={<CreatePizza currentOrderID={currentOrderID} />}
+	// 			/>
+	// 			<Route path="/salesReport2" element={<SalesListTwo />} />
+	// 		</Route>
+	// 	</Routes>
+	// )
 }

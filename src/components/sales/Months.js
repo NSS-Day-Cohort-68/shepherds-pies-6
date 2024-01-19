@@ -1,12 +1,12 @@
 import { months } from "../../helper"
 import "./Months.css"
 
-export const Months = ({ setMonth, getFilteredOrdersTotalPrice }) => {
+export const Months = ({ setSelectedMonth, getFilteredOrdersTotalPrice }) => {
 	return (
 		<select
 			className="months month-dropdown"
 			onChange={(event) => {
-				setMonth(event.target.value)
+				setSelectedMonth(event.target.value)
 				// getFilteredOrdersTotalPrice()
 			}}
 		>

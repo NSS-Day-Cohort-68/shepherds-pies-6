@@ -7,14 +7,14 @@ import {
 } from "../../services/toppingsService.js"
 
 export const Sale = ({ order, pizzasArray }) => {
-	const [currentOrder, setCurrentOrder] = useState([])
+	const [currentOrderPizzas, setCurrentOrderPizzas] = useState([])
 	const [pizzaToppings, setPizzaToppings] = useState([])
 	const [allToppings, setAllToppings] = useState([])
 	// const [totalFilteredSales, setTotalFilteredSales] = useState(0)
 
 	useEffect(() => {
 		getPizzasByOrderId(order.id).then((data) => {
-			setCurrentOrder(data)
+			setCurrentOrderPizzas(data)
 		})
 	}, [order])
 
@@ -80,8 +80,8 @@ export const Sale = ({ order, pizzasArray }) => {
 	let count = 1
 	return (
 		<div className="sale" key={order.orderId}>
-			<div className="sale-info">Order #{currentOrder[0]?.order.id}</div>
-			{currentOrder.map((pizzaObj) => {
+			<div className="sale-info">Order #{currentOrderPizzas[0]?.order.id}</div>
+			{currentOrderPizzas.map((pizzaObj) => {
 				return (
 					<div>
 						<header className="sale-info">
@@ -117,13 +117,8 @@ export const Sale = ({ order, pizzasArray }) => {
 				<b>Date:</b> {order.timestamp}
 			</div>
 			<div className="sale-info">
-				<b>Total Price: ${getTotalOrderPrice(currentOrder)}</b>
+				<b>Total Price: ${getTotalOrderPrice(currentOrderPizzas)}</b>
 			</div>
 		</div>
 	)
 }
-
-/* {`${(
-	pizzaObj.size.price +
-	pizzaObj.pizzaToppings.length * 0.5
-).toFixed(2)}`} */
