@@ -9,9 +9,11 @@ import {
 import { editOrder, getOrderById } from "../../services/orderService"
 import { Link, useParams } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
+import { useNavigate } from "react-router-dom"
 
 export const EditOrder = () => {
-  const { orderId } = useParams()
+  const { editOrderId } = useParams()
+
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
   const [currentOrder, setCurrentOrder] = useState([])
   const [allToppings, setAllToppings] = useState([])
@@ -19,7 +21,9 @@ export const EditOrder = () => {
   const [driverSelection, setDriverSelection] = useState(null)
   const [tableNumberSelection, setTableNumberSelection] = useState(0)
   const [allEmployees, setAllEmployees] = useState([])
+  const [orderId, setOrderId] = useState('')
   const tableNumbers = []
+
 
   const handleEditOrder = (event) => {
     const orderObj = {
@@ -79,6 +83,7 @@ export const EditOrder = () => {
     getAllEmployees().then((employeesArr) => {
       setAllEmployees(employeesArr)
     })
+    setOrderId(editOrderId)
   }, [])
 
   useEffect(() => {
@@ -148,7 +153,13 @@ export const EditOrder = () => {
             .join(", ")
           return (
             <div className="pizzas-details">
-              <div>
+              <div className="pizza-action-container">
+
+
+              <i class="fa-solid fa-pen-to-square">
+                <Link to={`/createPizza/${orderId}/${ordersPizzaObj.id}`}>Edit Pizza</Link>
+              </i>
+
                 <i
                   className="delete-btn fa-solid fa-trash"
                   onClick={async () => {
@@ -171,7 +182,7 @@ export const EditOrder = () => {
           )
         })}
         <button className="add-new-pizza-btn">
-          <Link to="/createPizza">New Pizza</Link>
+          <Link to={`/createPizza/${orderId}`}>New Pizza</Link>
         </button>
       </div>
       <div className="order-footer-container">

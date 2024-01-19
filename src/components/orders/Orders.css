@@ -125,3 +125,8 @@
 	justify-content: center;
 	text-align: center;
 }
+
+.pizza-action-container {
+	display: flex;
+}
+

@@ -10,6 +10,7 @@ import { EditOrder } from "../components/orders/EditOrder.js"
 import { OrderDetails } from "../components/orders/OrderDetails.js"
 import { EmployeeForm } from "../components/forms/EmployeeForm.js"
 
+
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
   const [currentOrderID, setCurrentOrderID] = useState(0)
@@ -39,7 +40,7 @@ export const ApplicationViews = () => {
         </Route>
 
         <Route path="editOrder">
-          <Route path=":orderId" element={<EditOrder />} />
+            <Route path=":editOrderId" element={<EditOrder />} />
         </Route>
 
         <Route
@@ -56,11 +57,16 @@ export const ApplicationViews = () => {
           path="employees"
           element={<EmployeesList currentUser={currentUser} />}
         />
+
         <Route path="salesReport" element={<SalesList />} />
+
         <Route
           path="createPizza"
           element={<CreatePizza currentOrderID={currentOrderID} />}
         />
+        <Route path="createPizza/:orderId" element={<CreatePizza />} />
+		    <Route path="createPizza/:orderId/:editPizzaId" element={<CreatePizza />} />
+
         <Route
           path="employee-detail-form/:employeeId"
           element={<EmployeeForm />}
