@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { getUserByEmail } from "../../services/userService"
 
-
 export const Login = () => {
 	const [email, set] = useState("")
 	const navigate = useNavigate()
@@ -19,6 +18,7 @@ export const Login = () => {
 					"shepard_user",
 					JSON.stringify({
 						id: employee.id,
+						isAdmin: employee.isAdmin,
 					})
 				)
 

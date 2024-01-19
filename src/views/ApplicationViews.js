@@ -1,77 +1,34 @@
 import { useEffect, useState } from "react"
-import { Outlet, Route, Routes } from "react-router-dom"
-import { NavBar } from "../components/nav/NavBar.js"
-import { OrdersList } from "../components/orders/OrdersList.js"
-import { ShowOrder } from "../components/orders/CreateOrder.js"
-import { EmployeesList } from "../components/employees/EmployeesList.js"
-import { SalesList } from "../components/sales/SalesList.js"
-import { CreatePizza } from "../components/pizzas/CreatePizza"
-import { EditOrder } from "../components/orders/EditOrder.js"
-import { OrderDetails } from "../components/orders/OrderDetails.js"
-import { EmployeeForm } from "../components/forms/EmployeeForm.js"
-
+import { AdminViews } from "./AdminViews.js"
+import { EmployeeViews } from "./EmployeeViews.js"
 
 export const ApplicationViews = () => {
-  const [currentUser, setCurrentUser] = useState({})
-  const [currentOrderID, setCurrentOrderID] = useState(0)
+	const [currentUser, setCurrentUser] = useState({})
+	const [currentOrderID, setCurrentOrderID] = useState(0)
 
-  useEffect(() => {
-    // get logged in user from local storage
-    const localUser = localStorage.getItem("shepard_user")
-    setCurrentUser(JSON.parse(localUser)) // { id: n }
-  }, [])
+	useEffect(() => {
+		// get logged in user from local storage
+		const localShepardUser = localStorage.getItem("shepard_user")
+		const shepardUserObj = JSON.parse(localShepardUser)
 
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <NavBar />
-            <Outlet />
-          </>
-        }
-      >
-        <Route index element={<OrdersList />} />
+		setCurrentUser(shepardUserObj)
+	}, [])
 
-        <Route path="allOrders">
-          <Route index element={<OrdersList />} />
-          <Route path=":orderId" element={<OrderDetails />} />
-        </Route>
-
-        <Route path="editOrder">
-            <Route path=":editOrderId" element={<EditOrder />} />
-        </Route>
-
-        <Route
-          path="showOrder"
-          element={
-            <ShowOrder
-              currentUser={currentUser}
-              setCurrentOrderID={setCurrentOrderID}
-              currentOrderID={currentOrderID}
-            />
-          }
-        />
-        <Route
-          path="employees"
-          element={<EmployeesList currentUser={currentUser} />}
-        />
-
-        <Route path="salesReport" element={<SalesList />} />
-
-        <Route
-          path="createPizza"
-          element={<CreatePizza currentOrderID={currentOrderID} />}
-        />
-        <Route path="createPizza/:orderId" element={<CreatePizza />} />
-		    <Route path="createPizza/:orderId/:editPizzaId" element={<CreatePizza />} />
-
-        <Route
-          path="employee-detail-form/:employeeId"
-          element={<EmployeeForm />}
-        />
-      </Route>
-    </Routes>
-  )
+	if (currentUser.isAdmin) {
+		return (
+			<AdminViews
+				currentUser={currentUser}
+				setCurrentOrderID={setCurrentOrderID}
+				currentOrderID={currentOrderID}
+			/>
+		)
+	} else {
+		return (
+			<EmployeeViews
+				currentUser={currentUser}
+				setCurrentOrderID={setCurrentOrderID}
+				currentOrderID={currentOrderID}
+			/>
+		)
+	}
 }

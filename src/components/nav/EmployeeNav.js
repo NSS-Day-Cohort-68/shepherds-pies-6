@@ -1,9 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 
-export const NavBar = () => {
+export const EmployeeNav = () => {
 	const navigate = useNavigate()
-
 	return (
 		<ul className="navbar">
 			<li className="navbar-item">
@@ -12,12 +11,12 @@ export const NavBar = () => {
 			<li className="navbar-item">
 				<Link to="/showOrder">New Order</Link>
 			</li>
-			<li className="navbar-item">
+			{/* <li className="navbar-item">
 				<Link to="/employees">Employees</Link>
 			</li>
 			<li className="navbar-item">
 				<Link to="/salesReport">Sales Report</Link>
-			</li>
+			</li> */}
 			{localStorage.getItem("shepard_user") ? (
 				<li className="navbar-item navbar-logout">
 					<Link

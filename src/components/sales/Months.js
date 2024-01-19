@@ -1,12 +1,12 @@
 import { months } from "../../helper"
 import "./Months.css"
 
-export const Months = ({ setMonth }) => {
+export const Months = ({ setSelectedMonth }) => {
 	return (
 		<select
 			className="months month-dropdown"
 			onChange={(event) => {
-				setMonth(event.target.value)
+				setSelectedMonth(event.target.value)
 			}}
 		>
 			<option value={0} className="month month-option">

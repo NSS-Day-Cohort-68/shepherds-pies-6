@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
-import { Sale } from "./Sale.js"
 import { getAllOrders } from "../../services/orderService.js"
-import { Months } from "./Months"
+import { Months } from "./Months.js"
+import { getPizzasByOrderId } from "../../services/pizzaService.js"
+import { SaleTwo } from "./Sale2.js"
 
-export const SalesList = () => {
+export const SalesListTwo = () => {
 	const [allOrders, setAllOrders] = useState([])
 	const [filteredOrders, setFilteredOrders] = useState([])
 	const [selectedMonth, setSelectedMonth] = useState("0")
+	const [currentOrderPizzas, setOrderPizzas] = useState([])
+	const [allToppings, setAllToppings] = useState([])
+	const [pizzaToppings, setPizzaToppings] = useState([])
 
 	useEffect(() => {
 		getAllOrders().then((data) => {
@@ -15,18 +19,25 @@ export const SalesList = () => {
 	}, [])
 
 	useEffect(() => {
+		filteredOrders.map((pizza) => console.log(pizza))
+	}, [filteredOrders])
+
+	useEffect(() => {
+		getPizzasByOrderId()
+	}, [])
+
+	useEffect(() => {
 		const filterOrdersByMonth = () => {
 			if (selectedMonth === "0") {
 				setFilteredOrders(allOrders)
 			} else {
 				const filtered = allOrders.filter((order) => {
-					const orderMonth = new Date(order.timestamp).getMonth() + 1 // Adding 1 because months are 0-indexed
+					const orderMonth = new Date(order.timestamp).getMonth() + 1 //Adding 1 because months are 0-indexed
 					return orderMonth.toString() === selectedMonth
 				})
 				setFilteredOrders(filtered)
 			}
 		}
-
 		filterOrdersByMonth()
 	}, [allOrders, selectedMonth])
 
@@ -39,17 +50,14 @@ export const SalesList = () => {
 			<div className="sales-container">
 				<div>Total Selected Sales: </div>
 				<h2>Sales</h2>
-				<article className="sales">
-					{filteredOrders.map((orderObj) => {
-						return (
-							<Sale
-								order={orderObj}
-								pizzasArray={orderObj.pizzas}
-								key={orderObj.id}
-							/>
-						)
-					})}
-				</article>
+				{filteredOrders.map((orderObj) => {
+					return (
+						<div>
+							<SaleTwo orderObj={orderObj} />
+						</div>
+					)
+				})}
+				<article className="sales"></article>
 			</div>
 		</>
 	)

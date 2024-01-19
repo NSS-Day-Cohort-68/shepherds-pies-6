@@ -1,9 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 
-export const NavBar = () => {
+export const AdminNav = () => {
 	const navigate = useNavigate()
-
 	return (
 		<ul className="navbar">
 			<li className="navbar-item">

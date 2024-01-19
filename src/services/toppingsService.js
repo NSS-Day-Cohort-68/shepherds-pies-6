@@ -4,7 +4,7 @@ export const getAllToppings = async () => {
 
 export const getPizzaToppingsByPizzaId = async (pizzaId) => {
 	return await fetch(
-		`http://locahost:8088/pizzaToppings?pizzaId=${pizzaId}&_expand=topping`
+		`http://localhost:8088/pizzaToppings?pizzaId=${pizzaId}&_expand=topping`
 	).then((res) => res.json())
 }
 
