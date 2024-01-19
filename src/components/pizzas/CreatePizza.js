@@ -169,6 +169,8 @@ export const CreatePizza = ({ currentOrderID }) => {
             currentPizzaToppings.length !== 0 && enableCheckBoxes()
         },[currentPizzaToppings])
 
+
+        
     return (
         <>
             <div className="createPizza-main-container">
