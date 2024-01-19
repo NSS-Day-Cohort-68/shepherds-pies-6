@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import { getAllCheeses, getAllSauces, getAllSizes, getAllToppings, getCurrentPizzaToppings, postTopping, deleteTopping, postPizza, getPizzaById, editPizza } from "../../services/pizzaService"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import "./CreatePizza.css"
 
 export const CreatePizza = ({ currentOrderID }) => {
     const navigate = useNavigate()
+    const { editPizzaId } = useParams()
+    const { orderId } = useParams()
+
 
     const [sizeArray, setSizeArray] = useState([])
     const [sizeChoice, setSizeChoice] = useState(undefined)
@@ -18,7 +21,8 @@ export const CreatePizza = ({ currentOrderID }) => {
     const [btnState, setBtnState] = useState(false)
     const [checkBoxState, setCheckBoxState] = useState(true)
     const [pizzaId, setPizzaId] = useState('')
-
+    const [editOrderId, setEditOrderId] = useState('')
+    const [newOrderId, setNewOrderId] = useState(undefined)
 
     // ------PIZZA FUNCTIONS------
 
@@ -37,14 +41,25 @@ export const CreatePizza = ({ currentOrderID }) => {
     }
 
     const addPizza = () => {
-        if (pizzaId === undefined) {
+        if (pizzaId === undefined && newOrderId === undefined) {
             const newPizzaObj = {
                     "sizeId": sizeChoice,
                     "cheeseId": cheeseChoice,
                     "sauceId": sauceChoice,
-                    "orderId": currentOrderID
+                    "orderId": editOrderId
             }
             postPizza(newPizzaObj).then((res)=>{
+                setWorkingPizza(res)
+            })
+        } else if (pizzaId === undefined && newOrderId !== undefined){
+                setEditOrderId(newOrderId)
+                const newOrderPizzaObj = {
+                    "sizeId": sizeChoice,
+                    "cheeseId": cheeseChoice,
+                    "sauceId": sauceChoice,
+                    "orderId": newOrderId
+            }
+            postPizza(newOrderPizzaObj).then((res)=>{
                 setWorkingPizza(res)
             })
         } else {
@@ -52,7 +67,7 @@ export const CreatePizza = ({ currentOrderID }) => {
                 "sizeId": sizeChoice,
                 "cheeseId": cheeseChoice,
                 "sauceId": sauceChoice,
-                "orderId": currentOrderID,
+                "orderId": editOrderId,
                 "id": pizzaId
             }
             editPizza(editPizzaObj)
@@ -104,10 +119,10 @@ export const CreatePizza = ({ currentOrderID }) => {
     }
 
     const checkPizzaBeforeAdd = () => {
-        if (sizeChoice === undefined || cheeseChoice === undefined || sauceChoice === undefined) {
-            window.alert('Please select pizza base choices and save before adding to order')
+        if (btnState === false) {
+            window.alert('Please select pizza base choices and save before finishing')
         } else {
-            navigate("/EditOrder")
+            navigate(`/editOrder/${editOrderId}`)
         }
     }
 
@@ -130,6 +145,12 @@ export const CreatePizza = ({ currentOrderID }) => {
         getAllToppings().then((response)=>{
             setToppingsArray(response)
         })
+
+        setNewOrderId(currentOrderID)
+
+        setPizzaId(editPizzaId)
+
+        setEditOrderId(orderId)
 
     }, [])
 
@@ -232,7 +253,7 @@ export const CreatePizza = ({ currentOrderID }) => {
                 </div> 
             </div>
             <div className="createPizza-toppings-container">
-                <div className="createPizza-choices-block">
+                <div className="createPizza-toppings-block">
                     <h2 className="createPizza-header">Add Toppings</h2>
                     <ul className="createPizza-choices-list">
                         {toppingsArray.map((topping) => {

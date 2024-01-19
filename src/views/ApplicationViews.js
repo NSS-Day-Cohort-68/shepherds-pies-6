@@ -40,7 +40,7 @@ export const ApplicationViews = () => {
         </Route>
 
         <Route path="editOrder">
-          <Route path=":orderId" element={<EditOrder />} />
+            <Route path=":editOrderId" element={<EditOrder />} />
         </Route>
 
         <Route
@@ -57,11 +57,16 @@ export const ApplicationViews = () => {
           path="employees"
           element={<EmployeesList currentUser={currentUser} />}
         />
+
         <Route path="salesReport" element={<SalesList />} />
+
         <Route
           path="createPizza"
           element={<CreatePizza currentOrderID={currentOrderID} />}
         />
+        <Route path="createPizza/:orderId" element={<CreatePizza />} />
+		    <Route path="createPizza/:orderId/:editPizzaId" element={<CreatePizza />} />
+
         <Route
           path="employee-detail-form/:employeeId"
           element={<EmployeeForm />}

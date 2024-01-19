@@ -14,7 +14,7 @@ form {
     font-weight: bold;
   }
   
-  input {
+  .form-control {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
