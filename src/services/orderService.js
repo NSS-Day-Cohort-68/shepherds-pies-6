@@ -6,7 +6,17 @@ export const getAllOrders = () => {
   )
 }
 export const addNewOrder = async (order) => {
-  return fetch("http://localhost:8088/orders", fetchOptions("POST", order))
+  const orderOptions = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(order)
+  }
+
+  let res = await fetch("http://localhost:8088/orders", orderOptions)
+  let newOrder = res.json()
+  return newOrder
 }
 
 export const deleteOrder = async (order) => {

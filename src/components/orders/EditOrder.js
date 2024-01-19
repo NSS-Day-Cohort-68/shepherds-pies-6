@@ -15,13 +15,13 @@ export const EditOrder = () => {
   const { editOrderId } = useParams()
 
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
-  const [currentOrder, setCurrentOrder] = useState([])
+  const [currentOrder, setCurrentOrder] = useState({})
   const [allToppings, setAllToppings] = useState([])
   const [pizzaToppings, setPizzaToppings] = useState([])
   const [driverSelection, setDriverSelection] = useState(null)
   const [tableNumberSelection, setTableNumberSelection] = useState(0)
   const [allEmployees, setAllEmployees] = useState([])
-  const [orderId, setOrderId] = useState('')
+  const [orderId, setOrderId] = useState(0)
   const tableNumbers = []
 
 
@@ -87,10 +87,12 @@ export const EditOrder = () => {
   }, [])
 
   useEffect(() => {
+    if(orderId !== 0) {
     getAndSetPizzas(orderId)
     getOrderById(orderId).then((order) => {
       setCurrentOrder(order)
-    })
+      console.log(order)
+    })}
   }, [orderId])
 
   return (

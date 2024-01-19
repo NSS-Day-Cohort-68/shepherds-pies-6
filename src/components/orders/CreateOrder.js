@@ -7,6 +7,7 @@ import {
 import { addNewOrder, getAllOrders } from "../../services/orderService"
 import { Link } from "react-router-dom"
 import { getAllEmployees } from "../../services/employeeService"
+import { useNavigate } from "react-router-dom"
 
 //Order page - add pizzas and edit table number or delivery driver
 export const ShowOrder = ({
@@ -14,6 +15,8 @@ export const ShowOrder = ({
   setCurrentOrderID,
   currentOrderID,
 }) => {
+  const navigate = useNavigate()
+
   const [currentOrdersPizzas, setCurrentOrdersPizzas] = useState([])
   const [allOrders, setAllOrders] = useState([])
   const [allToppings, setAllToppings] = useState([])
@@ -30,16 +33,27 @@ export const ShowOrder = ({
   }
 
   const handleAddNewOrder = (event) => {
-    const newOrderObj = {
-      id: allOrders.length + 1,
-      employeeId: currentUser.id,
-      deliveryDriver: driverSelection,
-      tableNumber: tableNumberSelection,
-      timestamp: new Date(),
-    }
+    const date = new Date() // Current date and time
+		const options = {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric",
+		}
+		const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date)
+		const newOrderObj = {
+			employeeId: currentUser.id,
+			deliveryDriver: driverSelection,
+			tableNumber: tableNumberSelection,
+			timestamp: formattedDate,
+		}
 
-    addNewOrder(newOrderObj)
-    setCurrentOrderID(newOrderObj.id)
+    addNewOrder(newOrderObj).then((res)=>{
+      setCurrentOrderID(res.id)
+      navigate(`/editOrder/${res.id}`)
+    })
     setIsNewOrderCreated(true)
   }
 
@@ -167,12 +181,7 @@ export const ShowOrder = ({
           </select>
         </div>
       )}
-
-      <button className="create-order-btn" onClick={handleAddNewOrder}>
-        New Order
-      </button>
-      <div className="pizzas-in-order-container">
-        {currentOrdersPizzas.map((ordersPizzaObj) => {
+{/* {currentOrdersPizzas.map((ordersPizzaObj) => {
           const toppingString = getToppingsForPizza(ordersPizzaObj)
             .map((topping) => topping.topping)
             .join(", ")
@@ -186,7 +195,14 @@ export const ShowOrder = ({
               <div> Toppings: {toppingString} </div>
             </div>
           )
-        })}
+        })} */}
+      
+      
+      <button className="create-order-btn" onClick={handleAddNewOrder}>
+        New Order
+      </button>
+      {/* <div className="pizzas-in-order-container">
+        
         <button className="add-new-pizza-btn" disabled={!isNewOrderCreated}>
           {isNewOrderCreated ? (
             <Link to="/createPizza" disabled={!isNewOrderCreated}>
@@ -196,19 +212,20 @@ export const ShowOrder = ({
             <span>New Pizza</span>
           )}
         </button>
-      </div>
-      <div className="order-footer-container">
+        </div> */}
+      
+      {/* <div className="order-footer-container">
         <div className="order-total">Total:</div>
         <div className="order-total">$00.00</div>
-      </div>
+      </div> */}
       <div className="order-footer-container">
-        <button className="all-orders-btn" disabled={!isNewOrderCreated}>
+        {/* <button className="all-orders-btn" disabled={!isNewOrderCreated}>
           {isNewOrderCreated ? (
             <Link to="/allOrders">All Orders</Link>
           ) : (
             <span>All Orders</span>
           )}
-        </button>
+        </button> */}
       </div>
     </div>
   )
