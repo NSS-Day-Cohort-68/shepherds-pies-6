@@ -5,14 +5,16 @@
       "name": "John `Scooby` Doo",
       "address": "Mystery Machine behind Shepherd's Pies",
       "phoneNumber": 1234567788,
-      "email": "john.dooby@mysteryinc.com"
+      "email": "john.dooby@mysteryinc.com",
+      "isAdmin": false
     },
     {
       "id": 2,
       "name": "Jane `The Jet` Smith",
       "address": "456 Oak Ave",
       "phoneNumber": 9876543210,
-      "email": "jetsetter@myspace.com"
+      "email": "jetsetter@myspace.com",
+      "isAdmin": true
     }
   ],
   "orders": [
@@ -120,6 +122,55 @@
       "tableNumber": "3",
       "timestamp": "January 19, 2024 at 3:19:53 PM",
       "id": 15
+    },
+    {
+      "employeeId": 1,
+      "deliveryDriver": null,
+      "tableNumber": "11",
+      "timestamp": "January 19, 2024 at 3:59:08 PM",
+      "id": 16
+    },
+    {
+      "employeeId": 1,
+      "deliveryDriver": null,
+      "tableNumber": "11",
+      "timestamp": "January 19, 2024 at 4:01:23 PM",
+      "id": 17
+    },
+    {
+      "employeeId": 1,
+      "deliveryDriver": null,
+      "tableNumber": "16",
+      "timestamp": "January 19, 2024 at 4:01:55 PM",
+      "id": 18
+    },
+    {
+      "employeeId": 2,
+      "deliveryDriver": null,
+      "tableNumber": "3",
+      "timestamp": "January 19, 2024 at 4:13:49 PM",
+      "id": 19
+    },
+    {
+      "employeeId": 2,
+      "deliveryDriver": null,
+      "tableNumber": "2",
+      "timestamp": "January 19, 2024 at 4:35:27 PM",
+      "id": 20
+    },
+    {
+      "employeeId": 2,
+      "deliveryDriver": null,
+      "tableNumber": "3",
+      "timestamp": "January 19, 2024 at 5:50:08 PM",
+      "id": 21
+    },
+    {
+      "employeeId": 2,
+      "deliveryDriver": null,
+      "tableNumber": "4",
+      "timestamp": "January 20, 2024 at 6:39:50 PM",
+      "id": 22
     }
   ],
   "pizzas": [
@@ -138,9 +189,9 @@
       "id": 5
     },
     {
-      "sizeId": "1",
-      "cheeseId": "3",
-      "sauceId": "1",
+      "sizeId": "3",
+      "cheeseId": "1",
+      "sauceId": "3",
       "orderId": "3",
       "id": 8
     },
@@ -155,7 +206,7 @@
       "sizeId": "3",
       "cheeseId": "4",
       "sauceId": "4",
-      "orderId": 5,
+      "orderId": "5",
       "id": 10
     },
     {
@@ -204,7 +255,7 @@
       "sizeId": "1",
       "cheeseId": "4",
       "sauceId": "1",
-      "orderId": 5,
+      "orderId": "5",
       "id": 17
     },
     {
@@ -233,6 +284,34 @@
       "sauceId": "2",
       "orderId": "15",
       "id": 21
+    },
+    {
+      "sizeId": "1",
+      "cheeseId": "1",
+      "sauceId": "2",
+      "orderId": "3",
+      "id": 22
+    },
+    {
+      "sizeId": "2",
+      "cheeseId": "1",
+      "sauceId": "3",
+      "orderId": "3",
+      "id": 23
+    },
+    {
+      "sizeId": "2",
+      "cheeseId": "2",
+      "sauceId": "1",
+      "orderId": "21",
+      "id": 24
+    },
+    {
+      "sizeId": "3",
+      "cheeseId": "2",
+      "sauceId": "3",
+      "orderId": "22",
+      "id": 25
     }
   ],
   "sizes": [
@@ -387,6 +466,66 @@
       "toppingId": 3,
       "pizzaId": 21,
       "id": 22
+    },
+    {
+      "toppingId": 2,
+      "pizzaId": 22,
+      "id": 23
+    },
+    {
+      "toppingId": 5,
+      "pizzaId": 8,
+      "id": 24
+    },
+    {
+      "toppingId": 1,
+      "pizzaId": 22,
+      "id": 25
+    },
+    {
+      "toppingId": 3,
+      "pizzaId": 23,
+      "id": 26
+    },
+    {
+      "toppingId": 5,
+      "pizzaId": 23,
+      "id": 27
+    },
+    {
+      "toppingId": 5,
+      "pizzaId": 22,
+      "id": 28
+    },
+    {
+      "toppingId": 2,
+      "pizzaId": 24,
+      "id": 29
+    },
+    {
+      "toppingId": 2,
+      "pizzaId": 10,
+      "id": 30
+    },
+    {
+      "toppingId": 3,
+      "pizzaId": 17,
+      "id": 31
+    },
+    {
+      "toppingId": 5,
+      "pizzaId": 17,
+      "id": 32
+    },
+    {
+      "toppingId": 6,
+      "pizzaId": 25,
+      "id": 33
+    },
+    {
+      "toppingId": 7,
+      "pizzaId": 25,
+      "id": 34
     }
   ]
 }

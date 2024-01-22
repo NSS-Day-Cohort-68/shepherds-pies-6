@@ -9,6 +9,7 @@ import { CreatePizza } from "../components/pizzas/CreatePizza"
 import { EditOrder } from "../components/orders/EditOrder.js"
 import { OrderDetails } from "../components/orders/OrderDetails.js"
 import { EmployeeForm } from "../components/forms/EmployeeForm.js"
+import { SalesListTwo } from "../components/sales/SalesList2.js"
 
 
 export const ApplicationViews = () => {
@@ -71,6 +72,16 @@ export const ApplicationViews = () => {
           path="employee-detail-form/:employeeId"
           element={<EmployeeForm />}
         />
+
+         {/* ______________ADDED BELOW______________ */}
+        <Route path="salesReport" element={<SalesList />} />
+				<Route
+					path="createPizza"
+					element={<CreatePizza currentOrderID={currentOrderID} />}
+				/>
+				<Route path="salesReport2" element={<SalesListTwo />} />
+
+
       </Route>
     </Routes>
   )

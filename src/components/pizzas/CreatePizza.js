@@ -170,7 +170,6 @@ export const CreatePizza = ({ currentOrderID }) => {
         },[currentPizzaToppings])
 
 
-        
     return (
         <>
             <div className="createPizza-main-container">
@@ -288,3 +287,4 @@ export const CreatePizza = ({ currentOrderID }) => {
         </>
     )
 }
+

@@ -84,6 +84,7 @@ export const EditOrder = () => {
       setAllEmployees(employeesArr)
     })
     setOrderId(editOrderId)
+    
   }, [])
 
   useEffect(() => {
@@ -158,7 +159,7 @@ export const EditOrder = () => {
               <div className="pizza-action-container">
 
 
-              <i class="fa-solid fa-pen-to-square">
+              <i className="fa-solid fa-pen-to-square">
                 <Link to={`/createPizza/${orderId}/${ordersPizzaObj.id}`}>Edit Pizza</Link>
               </i>
 
